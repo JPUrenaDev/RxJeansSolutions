@@ -1,1 +1,9 @@
-#EL CONTACTO VIA CHAT TENDRA 
+const Section = styled.section`
+  display: grid;
+  grid-template-columns: auto 1fr; 
+  gap: 10px;
+  grid-template-rows: auto 1fr;
+`;
+
+#ESTO LO DEFINí EN EL PADRE DE TODOS LOS ELEMENTOS, AQUI ESTOY DICIENDO 
+QUE LA PRIMERA COLUMNA TOMARA EL ESPACIO TOTAL, LA SEGUNDA COLUMNA TOMARA TODO EL ESPACIO DISPONIBLE.

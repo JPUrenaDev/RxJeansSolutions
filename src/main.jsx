@@ -2,17 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Routes } from "react-router-dom";
 import { Sidebar } from "./ui/Sidebar.jsx";
+
+import { Layout } from "./ui/Layout.jsx";
+import { NotFound } from "./ui/NotFound.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Sidebar />,
+    element: <Layout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "contact",
-        element: <Sidebar />,
+        element: <NotFound />,
       },
     ],
   },

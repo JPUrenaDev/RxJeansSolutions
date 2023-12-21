@@ -26,14 +26,14 @@ const sideBarItems = [
 export const SidebarItems = () => {
   const [despliegueDropDown, setDespliegueDropDown] = useState("");
   return (
-    <aside className="bg-indigo-500 w-[258px]  h-screen overflow-auto ">
+    <aside>
       <div className="flex flex-col items-center">
         <img src="./public/logo-Farmacia.png " className="h-[100px]" />
         <h1 className="text-center  pt-6 text-white">RxJeansSolutions</h1>
-        <hr className="h-px my-8 w-[200px] mb-7  bg-gray-200 border-0 dark:bg-gray-700"></hr>
+        <hr className="h-px my-8 md:w-[200px] w-[90px] mb-7  bg-gray-200 border-0 dark:bg-gray-700"></hr>
       </div>
       <nav>
-        <ul className="sideBarItems 0 flex flex-col gap-y-[20px] text-[15px]  text-white ml-4 ">
+        <ul className="sideBarItems  flex flex-col md:gap-y-[20px] gap-y-[2px] md:text-[15px] text-[9px]  text-white ml-4 ">
           <Link to={"Dashboard"} className={classNameItems}>
             <FaChartPie size={26} />
             <span>Dashboard</span>
@@ -49,10 +49,15 @@ export const SidebarItems = () => {
             <span>Configuración</span>
           </Link>
 
+          <Link className={classNameItems}>
+            <FaWhmcs size={26} />
+            <span>Ordenes</span>
+          </Link>
+
           <div className="flex flex-col items-center">
-            <hr className="h-px my-8 w-[200px] mb-4   bg-gray-200 border-0 dark:bg-gray-700"></hr>
+            <hr className="h-px my-8 md:w-[200px] w-[90px] mb-7  bg-gray-200 border-0 dark:bg-gray-700"></hr>
             <button
-              className="flex hover:bg-violet-600 w-full items-center gap-[30px] p-3  active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
+              className="flex hover:bg-violet-600  md:w-full items-center gap-[30px] p-3  active:bg-violet-700 focus:outline-none focus:ring focus:ring-violet-300"
               onClick={() => setDespliegueDropDown(!despliegueDropDown)}
             >
               <div className="flex gap-3">
