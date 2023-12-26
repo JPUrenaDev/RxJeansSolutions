@@ -1,0 +1,61 @@
+import React from "react";
+import styled from "styled-components";
+import { useSearchParams } from "react-router-dom";
+const Div = styled.div`
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+`;
+
+export const PaginationTable = () => {
+  const [searchParams, setSearchParams] = useSearchParams(1);
+
+  const NextPage = () => {
+    const actualPage = Number(searchParams.get("actualPage"));
+    setSearchParams({ actualPage: actualPage + 1 });
+  };
+
+  const PreviusPage = () => {
+    const actualPage = Number(searchParams.get("actualPage"));
+
+    if (!actualPage) setSearchParams({ actualPage: 1 });
+    if (actualPage === 1) setSearchParams({ actualPage: 1 });
+    if (actualPage !== 1 && actualPage)
+      setSearchParams({ actualPage: actualPage - 1 });
+  };
+
+  return (
+    <>
+      <Div>
+        <span className="text-sm text-gray-700 dark:text-gray-400">
+          Showing{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">1</span>{" "}
+          to{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            10
+          </span>{" "}
+          of{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            100
+          </span>{" "}
+          Entries
+        </span>
+
+        <div className="flex gap-3 p-3 ">
+          <button
+            onClick={PreviusPage}
+            className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 rounded-s hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Prev
+          </button>
+          <button
+            onClick={NextPage}
+            className="flex items-center justify-center px-4 h-10 text-base font-medium text-white bg-gray-800 border-0 border-s border-gray-700 rounded-e hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+          >
+            Next
+          </button>
+        </div>
+      </Div>
+    </>
+  );
+};

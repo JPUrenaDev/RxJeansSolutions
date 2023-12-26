@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-import { Sidebar } from "./ui/Sidebar";
+import { Sidebar } from "./ui/Sidebar/Sidebar";
 
 function App() {
   return (

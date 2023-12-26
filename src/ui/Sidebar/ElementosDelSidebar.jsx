@@ -1,29 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { IoIosArrowForward } from "react-icons/io";
-import { GrDashboard } from "react-icons/gr";
-import { FcSalesPerformance } from "react-icons/fc";
-import { FcDataConfiguration } from "react-icons/fc";
-import { FcComboChart } from "react-icons/fc";
+
 import { FaChartPie } from "react-icons/fa6";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import { FaWhmcs } from "react-icons/fa6";
 import { FaWrench } from "react-icons/fa6";
-import { MantenimientoItems } from "./MantenimientoItems";
-import { classNameItems } from "../../helper/HelperDesign/sideBarClassItems";
+import { MantenimientoItemsSidebar } from "./MantenimientoItemsSidebar";
+import { classNameItems } from "../../../helper/HelperDesign/sideBarClassItems";
 
-const sideBarItems = [
-  "Dashboard",
-  "Ventas",
-  "Ventas",
-
-  "Historial",
-
-  "Mantenimientos",
-  "Configuracion",
-];
-
-export const SidebarItems = () => {
+export const ElementosDelSidebar = () => {
   const [despliegueDropDown, setDespliegueDropDown] = useState("");
   return (
     <aside>
@@ -65,7 +50,7 @@ export const SidebarItems = () => {
                 <span>Mantenimientos</span>
               </div>
             </button>
-            {despliegueDropDown && <MantenimientoItems />}
+            {despliegueDropDown && <MantenimientoItemsSidebar />}
           </div>
         </ul>
       </nav>

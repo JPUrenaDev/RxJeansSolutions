@@ -7,8 +7,8 @@ import { FaHospitalUser } from "react-icons/fa6";
 import { FaBasketShopping } from "react-icons/fa6";
 import { FaHive } from "react-icons/fa6";
 import { FaClipboardUser } from "react-icons/fa6";
-import { classNameItems } from "../../helper/HelperDesign/sideBarClassItems";
-export const MantenimientoItems = () => {
+import { classNameItems } from "../../../helper/HelperDesign/sideBarClassItems";
+export const MantenimientoItemsSidebar = () => {
   return (
     <ul className="sideBarItems 0 flex ml-[-20px] flex-col text-[17px] mt-5 text-white ">
       <Link to={"Dashboard"} className={classNameItems}>
@@ -19,7 +19,7 @@ export const MantenimientoItems = () => {
         <FaAddressCard />
         Seguros Medicos
       </Link>
-      <Link to={"Dashboard"} className={classNameItems}>
+      <Link to={"clientes"} className={classNameItems}>
         <FaUserPlus />
         Clientes
       </Link>
