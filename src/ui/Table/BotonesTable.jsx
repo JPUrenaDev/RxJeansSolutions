@@ -4,6 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { FaEye } from "react-icons/fa";
 import { ModalW } from "../Modal/Modal";
 import styled from "styled-components";
+import { DeleteConfirmation } from "./DeleteConfirmation";
 
 const Div = styled.div`
   display: flex;
@@ -19,7 +20,9 @@ export const BotonesTable = () => {
             <FaEye size={30} />
           </button>
         </ModalW.Open>
-        <ModalW.Windows></ModalW.Windows>
+        <ModalW.Windows>
+          <DeleteConfirmation />
+        </ModalW.Windows>
       </ModalW>
 
       <ModalW>
@@ -37,7 +40,9 @@ export const BotonesTable = () => {
             <AiOutlineDelete size={30} />
           </button>
         </ModalW.Open>
-        <ModalW.Windows></ModalW.Windows>
+        <ModalW.Windows>
+          <DeleteConfirmation />
+        </ModalW.Windows>
       </ModalW>
     </Div>
   );

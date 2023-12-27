@@ -39,6 +39,7 @@ const Open = ({ children }) => {
 };
 
 const Windows = ({ children }) => {
+  console.log(children);
   const { setOpen, open } = useContext(ModalContext);
 
   const handleOpen = () => setOpen(true);
@@ -55,10 +56,12 @@ const Windows = ({ children }) => {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {open ? 1 : 2}
+            1
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {children}
+            {children
+              ? cloneElement(children, { handleClose: handleClose })
+              : 1}
           </Typography>
         </Box>
       </Modal>

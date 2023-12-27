@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { useSearchParams } from "react-router-dom";
+import { PaginationContext } from "../../../context/paginationContext";
 const Div = styled.div`
   justify-content: space-between;
   align-items: center;
@@ -8,20 +9,29 @@ const Div = styled.div`
 `;
 
 export const PaginationTable = () => {
-  const [searchParams, setSearchParams] = useSearchParams(1);
+  const { totalPages, firstElement, lastElement, TotalItems } =
+    useContext(PaginationContext);
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const NextPage = () => {
-    const actualPage = Number(searchParams.get("actualPage"));
-    setSearchParams({ actualPage: actualPage + 1 });
+    let paginaActual = Number(searchParams.get("actualPage"));
+
+    if (paginaActual == 0) {
+      setSearchParams({ actualPage: 2 });
+    } else {
+      setSearchParams({ actualPage: paginaActual + 1 });
+    }
+
+    if (paginaActual === totalPages)
+      setSearchParams({ actualPage: totalPages });
   };
 
   const PreviusPage = () => {
-    const actualPage = Number(searchParams.get("actualPage"));
-
-    if (!actualPage) setSearchParams({ actualPage: 1 });
-    if (actualPage === 1) setSearchParams({ actualPage: 1 });
-    if (actualPage !== 1 && actualPage)
-      setSearchParams({ actualPage: actualPage - 1 });
+    const paginaActual = Number(searchParams.get("actualPage"));
+    if (paginaActual === 1) setSearchParams({ actualPage: 1 });
+    if (paginaActual !== 1 && paginaActual)
+      setSearchParams({ actualPage: paginaActual - 1 });
   };
 
   return (
@@ -29,14 +39,16 @@ export const PaginationTable = () => {
       <Div>
         <span className="text-sm text-gray-700 dark:text-gray-400">
           Showing{" "}
-          <span className="font-semibold text-gray-900 dark:text-white">1</span>{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            {firstElement + 1}
+          </span>{" "}
           to{" "}
           <span className="font-semibold text-gray-900 dark:text-white">
-            10
+            {lastElement}
           </span>{" "}
           of{" "}
           <span className="font-semibold text-gray-900 dark:text-white">
-            100
+            {TotalItems}
           </span>{" "}
           Entries
         </span>
