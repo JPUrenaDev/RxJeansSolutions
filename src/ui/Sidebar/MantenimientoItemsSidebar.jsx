@@ -15,7 +15,7 @@ export const MantenimientoItemsSidebar = () => {
         <FaTableList />
         Categorias
       </Link>
-      <Link to={"Dashboard"} className={classNameItems}>
+      <Link to={"seguros"} className={classNameItems}>
         <FaAddressCard />
         Seguros Medicos
       </Link>

@@ -8,6 +8,7 @@ import { Layout } from "./ui/Layout/Layout.jsx";
 import { NotFound } from "./ui/NotFound.jsx";
 import { ClienteForm } from "./features/Clientes/ClienteForm.jsx";
 import { Clientes } from "./pages/Clientes/Clientes.jsx";
+import { Seguros } from "./pages/SegurosMedicos/Seguros.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "clientes",
         element: <Clientes />,
+      },
+      {
+        path: "seguros",
+        element: <Seguros />,
       },
     ],
   },

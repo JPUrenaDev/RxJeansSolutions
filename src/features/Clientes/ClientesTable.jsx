@@ -7,6 +7,7 @@ import { ItemsTableStyle } from "../../helpers/stylesReutilizables";
 import { ModalW } from "../../ui/Modal/Modal";
 import { ITEMSXPAGE } from "../../helpers/itemsXPage";
 import { PaginationContext } from "../../../context/paginationContext";
+import { usePagination } from "../../../../customHooks/usePagination";
 
 //AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
 
@@ -33,19 +34,15 @@ const myArray = [
   { id: 20, nombre: "Natalia", apellido: "Ruiz", edad: 37 },
 ];
 
-const totalPages = Math.ceil(myArray.length / ITEMSXPAGE);
-const TotalItems = myArray.length;
-
 export const ClientesTable = () => {
-  const [searchParams] = useSearchParams();
+  const {
+    totalPages,
+    TotalItems,
 
-  const PaginaActual = Number(
-    !searchParams.get("actualPage") ? 1 : searchParams.get("actualPage")
-  );
-
-  const firstElement = PaginaActual * ITEMSXPAGE - ITEMSXPAGE;
-  const lastElement = PaginaActual * ITEMSXPAGE;
-  const ArrayPaginado = myArray.slice(firstElement, lastElement);
+    firstElement,
+    lastElement,
+    ArrayPaginado,
+  } = usePagination(myArray);
 
   return (
     <>
