@@ -20,6 +20,9 @@ const myArray = [
 export const SegurosTable = () => {
   const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
     usePagination(myArray);
+
+  console.log(myArray);
+
   return (
     <>
       <Table columns={"100px 4fr 1fr "}>

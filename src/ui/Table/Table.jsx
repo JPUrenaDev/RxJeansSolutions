@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { TableContext } from "../../../context/tableContext";
 import styled from "styled-components";
 import { PaginationTable } from "./PaginationTable";
+import { Spinner } from "../Spinner";
 
 const RowsStyle = styled.div`
   display: grid;
@@ -28,8 +29,10 @@ const FooterStyle = styled.div`
   width: 100%;
 `;
 
-export const Table = ({ children, columns }) => {
-  return (
+export const Table = ({ children, columns, loading }) => {
+  return loading ? (
+    <Spinner />
+  ) : (
     <TableStyles className="border-2 border-gray">
       <TableContext.Provider value={columns}>{children}</TableContext.Provider>
     </TableStyles>
@@ -46,8 +49,7 @@ const Header = ({ children }) => {
 };
 
 const Rows = ({ data, callback }) => {
-  const elementos = useContext(TableContext);
-
+  const elementos = useContext(TableContext); //COLUMNAS
   return (
     <RowsStyle className="divide-y  divide-slate-300" columns={elementos}>
       {data.map(callback)}

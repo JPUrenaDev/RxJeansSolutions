@@ -17,11 +17,7 @@ export const PaginationTable = () => {
   const NextPage = () => {
     let paginaActual = Number(searchParams.get("actualPage"));
 
-    if (paginaActual == 0) {
-      setSearchParams({ actualPage: 2 });
-    } else {
-      setSearchParams({ actualPage: paginaActual + 1 });
-    }
+    setSearchParams({ actualPage: paginaActual + 1 });
 
     if (paginaActual === totalPages)
       setSearchParams({ actualPage: totalPages });

@@ -8,7 +8,10 @@ import { ModalW } from "../../ui/Modal/Modal";
 import { ITEMSXPAGE } from "../../helpers/itemsXPage";
 import { PaginationContext } from "../../../context/paginationContext";
 import { usePagination } from "../../../../customHooks/usePagination";
-
+import { useGetAllUsers } from "../../../../customHooks/useGetAllUser";
+import { getAllClientes } from "../../services/apiUsers";
+import { Spinner } from "../../ui/Spinner";
+import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 //AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
 
 const myArray = [
@@ -35,23 +38,27 @@ const myArray = [
 ];
 
 export const ClientesTable = () => {
-  const {
-    totalPages,
-    TotalItems,
+  const { data = [], isLoading } = useGetAllUsers();
+  const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
+    usePagination(myArray, data, isLoading);
 
-    firstElement,
-    lastElement,
-    ArrayPaginado,
-  } = usePagination(myArray);
-
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <>
-      <Table columns="100px 1fr 1fr 1fr 1fr ">
+      <div className="flex justify-between ">
+        <h1 className="font-semibold text-xl mb-[70px] tracking-wide">
+          CLIENTES
+        </h1>
+        <ButtonMantenimientos> Agregar Nuevo Cliente</ButtonMantenimientos>
+      </div>
+      <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr ">
         <Table.Header>
           <div></div>
           <div>Nombre</div>
-          <div>Seguro Medico</div>
+          <div>Apellidos</div>
           <div>Edad</div>
+          <div>Seguro Medico</div>
           <div></div>
         </Table.Header>
 
@@ -60,16 +67,23 @@ export const ClientesTable = () => {
           callback={(clientes) => (
             <>
               <ItemsTableStyle>{clientes.id}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.nombre}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.apellido}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.edad}</ItemsTableStyle>
+              <ItemsTableStyle>{clientes.Nombres}</ItemsTableStyle>
+              <ItemsTableStyle>{clientes.Apellidos}</ItemsTableStyle>
+              <ItemsTableStyle>{clientes.Fecha_Nacimiento}</ItemsTableStyle>
+              <ItemsTableStyle>{clientes.seguros.nombre_ars}</ItemsTableStyle>
               <BotonesTable />
             </>
           )}
         />
 
         <PaginationContext.Provider
-          value={{ firstElement, lastElement, TotalItems, totalPages }}
+          value={{
+            firstElement,
+            lastElement,
+            TotalItems,
+            totalPages,
+            isLoading,
+          }}
         >
           <Table.Footer></Table.Footer>
         </PaginationContext.Provider>

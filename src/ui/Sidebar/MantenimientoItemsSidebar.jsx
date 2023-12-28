@@ -11,7 +11,7 @@ import { classNameItems } from "../../../helper/HelperDesign/sideBarClassItems";
 export const MantenimientoItemsSidebar = () => {
   return (
     <ul className="sideBarItems 0 flex ml-[-20px] flex-col text-[17px] mt-5 text-white ">
-      <Link to={"Dashboard"} className={classNameItems}>
+      <Link to={"categorias"} className={classNameItems}>
         <FaTableList />
         Categorias
       </Link>
@@ -23,7 +23,7 @@ export const MantenimientoItemsSidebar = () => {
         <FaUserPlus />
         Clientes
       </Link>
-      <Link to={"Dashboard"} className={classNameItems}>
+      <Link to={"empleados"} className={classNameItems}>
         <FaClipboardUser />
         Empleados
       </Link>

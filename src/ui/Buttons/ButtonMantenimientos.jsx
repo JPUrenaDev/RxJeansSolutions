@@ -1,5 +1,6 @@
 import React from "react";
 import { ModalW } from "../Modal/Modal";
+import { ClienteForm } from "../../features/Clientes/ClienteForm";
 
 export const ButtonMantenimientos = ({ children }) => {
   return (
@@ -9,7 +10,9 @@ export const ButtonMantenimientos = ({ children }) => {
           {children}
         </button>
       </ModalW.Open>
-      <ModalW.Windows></ModalW.Windows>
+      <ModalW.Windows>
+        <ClienteForm />
+      </ModalW.Windows>
     </ModalW>
   );
 };
