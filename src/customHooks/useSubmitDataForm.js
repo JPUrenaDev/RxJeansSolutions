@@ -10,7 +10,7 @@ import {
 
 import { useForm } from "react-hook-form";
 
-export const useSubmitDataForm = async () => {
+export function useSubmitDataForm() {
   const {
     register,
     handleSubmit,
@@ -20,8 +20,7 @@ export const useSubmitDataForm = async () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const { Nombres, Apellidos } = data;
   };
 
   return { register, handleSubmit, watch, errors, onSubmit };
-};
+}

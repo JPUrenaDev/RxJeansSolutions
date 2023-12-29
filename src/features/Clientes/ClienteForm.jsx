@@ -7,9 +7,7 @@ import { useSubmitDataForm } from "../../customHooks/useSubmitDataForm";
 import { RequireFieldFormMessage } from "../../helpers/RequireFieldFormMessage";
 
 export const ClienteForm = ({ handleClose }) => {
-  const { register, handleSubmit, watch, errors, onSubmit } =
-    useSubmitDataForm();
-
+  const { register, prueba, watch, errors, onSubmit } = useSubmitDataForm();
   return (
     <div>
       <h3
@@ -18,7 +16,7 @@ export const ClienteForm = ({ handleClose }) => {
       >
         x
       </h3>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+      <form onSubmit={prueba} className="w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
