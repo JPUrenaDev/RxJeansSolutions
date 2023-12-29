@@ -3,7 +3,7 @@ import { Table } from "../../ui/Table/Table";
 import { ItemsTableStyle } from "../../helpers/stylesReutilizables";
 import { BotonesTable } from "../../ui/Table/BotonesTable";
 import { useSearchParams } from "react-router-dom";
-import { usePagination } from "../../../../customHooks/usePagination";
+import { usePagination } from "../../customHooks/usePagination";
 import { PaginationContext } from "../../../context/paginationContext";
 
 const myArray = [

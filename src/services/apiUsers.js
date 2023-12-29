@@ -7,6 +7,6 @@ export const getAllClientes = async (a) => {
       nombre_ars
     )
   `);
-
+  console.log(data);
   return data;
 };

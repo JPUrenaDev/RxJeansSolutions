@@ -7,9 +7,9 @@ import { ItemsTableStyle } from "../../helpers/stylesReutilizables";
 import { ModalW } from "../../ui/Modal/Modal";
 import { ITEMSXPAGE } from "../../helpers/itemsXPage";
 import { PaginationContext } from "../../../context/paginationContext";
-import { usePagination } from "../../../../customHooks/usePagination";
-import { useGetAllUsers } from "../../../../customHooks/useGetAllUser";
-import { getAllClientes } from "../../services/apiUsers";
+import { usePagination } from "../../customHooks/usePagination";
+
+import { useGetAllUsers } from "../../customHooks/useGetAllUser";
 import { Spinner } from "../../ui/Spinner";
 import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 //AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.

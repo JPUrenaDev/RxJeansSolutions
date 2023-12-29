@@ -1,5 +1,5 @@
 import React from "react";
-import { usePagination } from "../../../../customHooks/usePagination";
+import { usePagination } from "../../customHooks/usePagination";
 import { ItemsTableStyle } from "../../helpers/stylesReutilizables";
 import { BotonesTable } from "../../ui/Table/BotonesTable";
 import { Table } from "../../ui/Table/Table";
