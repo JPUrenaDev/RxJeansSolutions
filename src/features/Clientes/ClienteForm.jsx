@@ -5,9 +5,16 @@ import { useForm } from "react-hook-form";
 
 import { useSubmitDataForm } from "../../customHooks/useSubmitDataForm";
 import { RequireFieldFormMessage } from "../../helpers/RequireFieldFormMessage";
+import { insertarUsuario } from "../../customHooks/useInsertUser";
 
 export const ClienteForm = ({ handleClose }) => {
-  const { register, prueba, watch, errors, onSubmit } = useSubmitDataForm();
+  const { mutation } = insertarUsuario();
+
+  const onSubmit = (data) => {
+    mutation.mutate(data);
+  };
+
+  const { register, handleSubmit, watch, errors } = useSubmitDataForm();
   return (
     <div>
       <h3
@@ -16,7 +23,7 @@ export const ClienteForm = ({ handleClose }) => {
       >
         x
       </h3>
-      <form onSubmit={prueba} className="w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -173,15 +180,15 @@ export const ClienteForm = ({ handleClose }) => {
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="seguro"
+              htmlFor="id_Ars"
             >
               Seguro Médico
             </label>
             <div className="relative">
               <select
-                {...register("seguroMedico")}
+                {...register("id_Ars")}
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="seguro"
+                id="id_Ars"
               >
                 <option>Senasa</option>
                 <option>Humano</option>
@@ -201,14 +208,14 @@ export const ClienteForm = ({ handleClose }) => {
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="infoAdicionales"
+              htmlFor="Notas_Adicionales"
             >
               Informaciones Adicionales
             </label>
             <textarea
-              {...register("infoAdicionales")}
+              {...register("Notas_Adicionales")}
               className="appearance-none mb-4 block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="infoAdicionales"
+              id="Notas_Adicionales"
               type="text"
               placeholder="Informaciones Adicionales:"
             />

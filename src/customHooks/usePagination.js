@@ -1,6 +1,6 @@
 import { useSearchParams } from "react-router-dom";
 import { ITEMSXPAGE } from "../helpers/itemsXPage";
-export const usePagination = (myArray, data, loading) => {
+export const usePagination = (data, loading) => {
   console.log(data?.length);
   const totalPages = Math.ceil(data?.length / ITEMSXPAGE);
   const TotalItems = data?.length;

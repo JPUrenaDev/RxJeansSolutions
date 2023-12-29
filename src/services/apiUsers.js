@@ -10,3 +10,13 @@ export const getAllClientes = async (a) => {
   console.log(data);
   return data;
 };
+
+export const useInsertUser = async (Clientesinformation) => {
+  console.log(Clientesinformation);
+  const { data, error } = await supabase
+    .from("clientes")
+    .insert([{ ...Clientesinformation, id_Ars: 2 }])
+    .select();
+
+  if (data) return data;
+};

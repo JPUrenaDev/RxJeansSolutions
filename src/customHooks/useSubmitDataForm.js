@@ -1,13 +1,5 @@
 //!CUSTOM HOOK.
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-
 import { useForm } from "react-hook-form";
 
 export function useSubmitDataForm() {
@@ -18,9 +10,5 @@ export function useSubmitDataForm() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
-
-  return { register, handleSubmit, watch, errors, onSubmit };
+  return { register, handleSubmit, watch, errors };
 }
