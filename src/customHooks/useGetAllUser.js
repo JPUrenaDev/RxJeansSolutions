@@ -1,17 +1,13 @@
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getAllClientes } from "../services/apiUsers";
-
-const queryClient = new QueryClient();
 
 export const useGetAllUsers = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["dataClientes"],
+    queryKey: ["clientes"],
     queryFn: getAllClientes,
   });
+
+  console.log(data, 1111111111, "jeanspaul");
 
   return { isLoading, error, data };
 };

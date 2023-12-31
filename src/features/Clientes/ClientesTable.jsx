@@ -29,42 +29,46 @@ export const ClientesTable = () => {
         </h1>
         <ButtonMantenimientos> Agregar Nuevo Cliente</ButtonMantenimientos>
       </div>
-      <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr ">
-        <Table.Header>
-          <div></div>
-          <div>Nombre</div>
-          <div>Apellidos</div>
-          <div>Edad</div>
-          <div>Seguro Medico</div>
-          <div></div>
-        </Table.Header>
+      {data.length >= 1 ? (
+        <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr ">
+          <Table.Header>
+            <div></div>
+            <div>Nombre</div>
+            <div>Apellidos</div>
+            <div>Edad</div>
+            <div>Seguro Medico</div>
+            <div></div>
+          </Table.Header>
 
-        <Table.Rows
-          data={ArrayPaginado}
-          callback={(clientes) => (
-            <>
-              <ItemsTableStyle>{clientes.id}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.Nombres}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.Apellidos}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.Fecha_Nacimiento}</ItemsTableStyle>
-              <ItemsTableStyle>{clientes.seguros.nombre_ars}</ItemsTableStyle>
-              <BotonesTable cliente={clientes} />
-            </>
-          )}
-        />
+          <Table.Rows
+            data={ArrayPaginado}
+            callback={(clientes) => (
+              <>
+                <ItemsTableStyle>{clientes.id}</ItemsTableStyle>
+                <ItemsTableStyle>{clientes.Nombres}</ItemsTableStyle>
+                <ItemsTableStyle>{clientes.Apellidos}</ItemsTableStyle>
+                <ItemsTableStyle>{clientes.Fecha_Nacimiento}</ItemsTableStyle>
+                <ItemsTableStyle>{clientes.seguros.nombre_ars}</ItemsTableStyle>
+                <BotonesTable cliente={clientes} />
+              </>
+            )}
+          />
 
-        <PaginationContext.Provider
-          value={{
-            firstElement,
-            lastElement,
-            TotalItems,
-            totalPages,
-            isLoading,
-          }}
-        >
-          <Table.Footer></Table.Footer>
-        </PaginationContext.Provider>
-      </Table>
+          <PaginationContext.Provider
+            value={{
+              firstElement,
+              lastElement,
+              TotalItems,
+              totalPages,
+              isLoading,
+            }}
+          >
+            <Table.Footer></Table.Footer>
+          </PaginationContext.Provider>
+        </Table>
+      ) : (
+        <h1>NO HAY CLIENTES REGISTRADOS</h1>
+      )}
     </>
   );
 };

@@ -9,10 +9,10 @@ import { insertarUsuario } from "../../customHooks/useInsertUser";
 import toast from "react-hot-toast";
 
 export const ClienteForm = ({ handleClose, cliente }) => {
-  const { mutation } = insertarUsuario(handleClose);
+  const { createUser, isCreating } = insertarUsuario(handleClose);
 
   const onSubmit = (data) => {
-    mutation.mutate(data);
+    createUser(data);
   };
 
   const { register, handleSubmit, watch, errors } = useSubmitDataForm({

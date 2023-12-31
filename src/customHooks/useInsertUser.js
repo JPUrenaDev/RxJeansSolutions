@@ -1,15 +1,17 @@
-import { useMutation, QueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 
 import { useInsertUser } from "../services/apiUsers";
-const queryClient = new QueryClient();
+
 export const insertarUsuario = (handleClose) => {
-  const mutation = useMutation({
+  const queryClient = useQueryClient();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { mutate: createUser, isLoading: isCreating } = useMutation({
     mutationFn: useInsertUser,
+
     onSuccess: (data) => {
       toast.success("El Cliente se ha insertado correctamente");
-      queryClient.invalidateQueries();
-      //queryClient.invalidateQueries({ queryKey: ["dataClientes"] });
+      queryClient.invalidateQueries({ queryKey: ["clientes"] });
       handleClose();
     },
     onError: () => {
@@ -17,5 +19,5 @@ export const insertarUsuario = (handleClose) => {
     },
   });
 
-  return { mutation };
+  return { createUser, isCreating };
 };
