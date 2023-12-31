@@ -14,38 +14,8 @@ import { Seguros } from "./pages/SegurosMedicos/Seguros.jsx";
 import { Empleados } from "./pages/Empleados/Empleados.jsx";
 import { Categorias } from "./pages/Categorias/Categorias.jsx";
 
-const queryClient = new QueryClient();
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    errorElement: <NotFound />,
-    children: [
-      {
-        path: "clientes",
-        element: <Clientes />,
-      },
-      {
-        path: "seguros",
-        element: <Seguros />,
-      },
-      {
-        path: "empleados",
-        element: <Empleados />,
-      },
-      {
-        path: "categorias",
-        element: <Categorias />,
-      },
-    ],
-  },
-]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <RouterProvider router={router} />
-    </QueryClientProvider>
+    <App />
   </React.StrictMode>
 );

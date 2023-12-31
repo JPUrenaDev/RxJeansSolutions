@@ -5,23 +5,24 @@ import { FaEye } from "react-icons/fa";
 import { ModalW } from "../Modal/Modal";
 import styled from "styled-components";
 import { DeleteConfirmation } from "./DeleteConfirmation";
+import { ClienteForm } from "../../features/Clientes/ClienteForm";
 
 const Div = styled.div`
   display: flex;
   align-items: center;
   gap: 2fr;
 `;
-export const BotonesTable = () => {
+export const BotonesTable = ({ cliente }) => {
   return (
     <Div>
       <ModalW>
-        <ModalW.Open>
+        <ModalW.Open cliente={cliente}>
           <button>
             <FaEye size={30} />
           </button>
         </ModalW.Open>
         <ModalW.Windows>
-          <DeleteConfirmation />
+          <ClienteForm cliente={cliente} />
         </ModalW.Windows>
       </ModalW>
 

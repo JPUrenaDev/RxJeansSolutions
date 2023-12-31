@@ -25,7 +25,6 @@ export const Layout = () => {
   return (
     <>
       <Section>
-        <Header />
         <Sidebar />
         <Main>
           <Outlet />

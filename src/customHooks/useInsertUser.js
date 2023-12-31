@@ -1,22 +1,19 @@
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import toast from "react-hot-toast";
+import { useMutation, QueryClient } from "@tanstack/react-query";
+import toast, { Toaster } from "react-hot-toast";
 
 import { useInsertUser } from "../services/apiUsers";
 const queryClient = new QueryClient();
-
-export const insertarUsuario = () => {
+export const insertarUsuario = (handleClose) => {
   const mutation = useMutation({
     mutationFn: useInsertUser,
     onSuccess: (data) => {
-      toast.success("new cabin successfully created");
-      toast.success("Successfully created!");
-      queryClient.invalidateQueries({ queryKey: ["repoData"] });
+      toast.success("El Cliente se ha insertado correctamente");
+      queryClient.invalidateQueries();
+      //queryClient.invalidateQueries({ queryKey: ["dataClientes"] });
+      handleClose();
+    },
+    onError: () => {
+      toast.error("error inserting data");
     },
   });
 

@@ -30,17 +30,17 @@ export const ModalW = ({ children }) => {
   );
 };
 
-const Open = ({ children }) => {
+const Open = ({ children, cliente = {} }) => {
   const { setOpen, open } = useContext(ModalContext);
   return cloneElement(children, {
     onClick: () => {
       setOpen(!open);
+      console.log(cliente);
     },
   });
 };
 
 const Windows = ({ children }) => {
-  console.log(children);
   const { setOpen, open } = useContext(ModalContext);
 
   const handleOpen = () => setOpen(true);

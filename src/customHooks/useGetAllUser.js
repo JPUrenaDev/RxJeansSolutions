@@ -9,11 +9,9 @@ const queryClient = new QueryClient();
 
 export const useGetAllUsers = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["dataClientes"],
     queryFn: getAllClientes,
   });
-
-  console.log(data, isLoading);
 
   return { isLoading, error, data };
 };

@@ -35,7 +35,7 @@ export const EmpleadosTable = () => {
               <ItemsTableStyle>{clientes.nombre}</ItemsTableStyle>
               <ItemsTableStyle>{clientes.apellido}</ItemsTableStyle>
               <ItemsTableStyle>{clientes.edad}</ItemsTableStyle>
-              <BotonesTable />
+              <BotonesTable></BotonesTable>
             </>
           )}
         />

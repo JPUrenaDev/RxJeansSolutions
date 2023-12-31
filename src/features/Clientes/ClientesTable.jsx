@@ -48,7 +48,7 @@ export const ClientesTable = () => {
               <ItemsTableStyle>{clientes.Apellidos}</ItemsTableStyle>
               <ItemsTableStyle>{clientes.Fecha_Nacimiento}</ItemsTableStyle>
               <ItemsTableStyle>{clientes.seguros.nombre_ars}</ItemsTableStyle>
-              <BotonesTable />
+              <BotonesTable cliente={clientes} />
             </>
           )}
         />

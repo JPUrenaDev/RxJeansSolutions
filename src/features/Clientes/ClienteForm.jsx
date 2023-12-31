@@ -6,15 +6,18 @@ import { useForm } from "react-hook-form";
 import { useSubmitDataForm } from "../../customHooks/useSubmitDataForm";
 import { RequireFieldFormMessage } from "../../helpers/RequireFieldFormMessage";
 import { insertarUsuario } from "../../customHooks/useInsertUser";
+import toast from "react-hot-toast";
 
-export const ClienteForm = ({ handleClose }) => {
-  const { mutation } = insertarUsuario();
+export const ClienteForm = ({ handleClose, cliente }) => {
+  const { mutation } = insertarUsuario(handleClose);
 
   const onSubmit = (data) => {
     mutation.mutate(data);
   };
 
-  const { register, handleSubmit, watch, errors } = useSubmitDataForm();
+  const { register, handleSubmit, watch, errors } = useSubmitDataForm({
+    cliente,
+  });
   return (
     <div>
       <h3
