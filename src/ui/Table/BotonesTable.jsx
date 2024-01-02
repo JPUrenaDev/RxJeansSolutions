@@ -12,17 +12,18 @@ const Div = styled.div`
   align-items: center;
   gap: 2fr;
 `;
-export const BotonesTable = ({ cliente }) => {
+export const BotonesTable = ({ datos, Form }) => {
+  console.log(datos);
   return (
     <Div>
       <ModalW>
-        <ModalW.Open cliente={cliente}>
+        <ModalW.Open>
           <button>
             <FaEye size={30} />
           </button>
         </ModalW.Open>
         <ModalW.Windows>
-          <ClienteForm cliente={cliente} />
+          <Form datos={datos} />
         </ModalW.Windows>
       </ModalW>
 

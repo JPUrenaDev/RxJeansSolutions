@@ -12,6 +12,7 @@ import { usePagination } from "../../customHooks/usePagination";
 import { useGetAllUsers } from "../../customHooks/useGetAllUser";
 import { Spinner } from "../../ui/Spinner";
 import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
+import { ClienteForm } from "./ClienteForm";
 //AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
 
 export const ClientesTable = () => {
@@ -23,11 +24,14 @@ export const ClientesTable = () => {
     <Spinner />
   ) : (
     <>
-      <div className="flex justify-between ">
+      <div className="flex justify-between items-center">
         <h1 className="font-semibold text-xl mb-[70px] tracking-wide">
           CLIENTES
         </h1>
-        <ButtonMantenimientos> Agregar Nuevo Cliente</ButtonMantenimientos>
+        <ButtonMantenimientos Form={ClienteForm}>
+          {" "}
+          Agregar Nuevo Cliente
+        </ButtonMantenimientos>
       </div>
       {data.length >= 1 ? (
         <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr ">
@@ -49,7 +53,7 @@ export const ClientesTable = () => {
                 <ItemsTableStyle>{clientes.Apellidos}</ItemsTableStyle>
                 <ItemsTableStyle>{clientes.Fecha_Nacimiento}</ItemsTableStyle>
                 <ItemsTableStyle>{clientes.seguros.nombre_ars}</ItemsTableStyle>
-                <BotonesTable cliente={clientes} />
+                <BotonesTable datos={clientes} Form={ClienteForm} />
               </>
             )}
           />

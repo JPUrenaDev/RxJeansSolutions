@@ -13,8 +13,10 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 700,
-  height: 800,
+  with: "auto",
+  maxwidth: 700,
+  height: "auto",
+  maxheight: 800,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -30,12 +32,11 @@ export const ModalW = ({ children }) => {
   );
 };
 
-const Open = ({ children, cliente = {} }) => {
+const Open = ({ children }) => {
   const { setOpen, open } = useContext(ModalContext);
   return cloneElement(children, {
     onClick: () => {
       setOpen(!open);
-      console.log(cliente);
     },
   });
 };
@@ -55,7 +56,6 @@ const Windows = ({ children }) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <Typography id="modal-modal-title">1</Typography>
         <Typography id="modal-modal-description">
           {children
             ? cloneElement(children, { handleClose: handleClose })

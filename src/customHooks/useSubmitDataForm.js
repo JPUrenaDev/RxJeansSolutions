@@ -2,13 +2,14 @@
 
 import { useForm } from "react-hook-form";
 
-export function useSubmitDataForm({ cliente }) {
+export function useSubmitDataForm({ datos }) {
+  console.log(datos);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ defaultValues: cliente });
+  } = useForm({ defaultValues: datos });
 
   return { register, handleSubmit, watch, errors };
 }

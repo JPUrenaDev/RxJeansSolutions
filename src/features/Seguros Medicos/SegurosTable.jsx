@@ -5,26 +5,27 @@ import { BotonesTable } from "../../ui/Table/BotonesTable";
 import { useSearchParams } from "react-router-dom";
 import { usePagination } from "../../customHooks/usePagination";
 import { PaginationContext } from "../../../context/paginationContext";
+import { useGetAllArs } from "../../customHooks/useGetAllArs";
+import { SegurosForm } from "./SegurosForm";
+import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 
-const myArray = [
-  { id: 1, NombreArs: "Ars Futuro" },
-  { id: 2, NombreArs: "Ars Humano" },
-  { id: 3, NombreArs: "Ars Palic" },
-  { id: 4, NombreArs: "Ars XYZ" },
-  { id: 5, NombreArs: "Ars ABC" },
-  { id: 6, NombreArs: "Ars 123" },
-  { id: 7, NombreArs: "Ars Random" },
-  { id: 8, NombreArs: "Ars Nuevo" },
-  { id: 9, NombreArs: "Ars Único" },
-];
 export const SegurosTable = () => {
-  const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
-    usePagination(myArray);
+  const { data: seguros = [], isLoading } = useGetAllArs();
 
-  console.log(myArray);
+  const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
+    usePagination(seguros);
 
   return (
     <>
+      <div className="flex justify-between">
+        <h1 className="font-semibold text-xl mb-[70px] tracking-wide">
+          SEGUROS MEDICOS
+        </h1>
+        <ButtonMantenimientos Form={SegurosForm}>
+          {" "}
+          Agregar Nueva ARS
+        </ButtonMantenimientos>
+      </div>
       <Table columns={"100px 4fr 1fr "}>
         <Table.Header>
           <div></div>
@@ -37,8 +38,8 @@ export const SegurosTable = () => {
           callback={(ARS) => (
             <>
               <ItemsTableStyle>{ARS.id}</ItemsTableStyle>
-              <ItemsTableStyle>{ARS.NombreArs}</ItemsTableStyle>
-              <BotonesTable />
+              <ItemsTableStyle>{ARS.nombre_ars}</ItemsTableStyle>
+              <BotonesTable datos={ARS} Form={SegurosForm} />
             </>
           )}
         />

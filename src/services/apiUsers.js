@@ -15,7 +15,7 @@ export const useInsertUser = async (Clientesinformation) => {
   console.log(Clientesinformation);
   const { data, error } = await supabase
     .from("clientes")
-    .insert([{ ...Clientesinformation, id_Ars: 2 }])
+    .insert([{ ...Clientesinformation }])
     .select();
 
   if (data) return data;

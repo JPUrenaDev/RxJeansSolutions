@@ -7,7 +7,5 @@ export const useGetAllUsers = () => {
     queryFn: getAllClientes,
   });
 
-  console.log(data, 1111111111, "jeanspaul");
-
   return { isLoading, error, data };
 };

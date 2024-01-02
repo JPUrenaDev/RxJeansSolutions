@@ -7,16 +7,17 @@ import { useSubmitDataForm } from "../../customHooks/useSubmitDataForm";
 import { RequireFieldFormMessage } from "../../helpers/RequireFieldFormMessage";
 import { insertarUsuario } from "../../customHooks/useInsertUser";
 import toast from "react-hot-toast";
-
-export const ClienteForm = ({ handleClose, cliente }) => {
-  const { createUser, isCreating } = insertarUsuario(handleClose);
+import { useGetAllArs } from "../../customHooks/useGetAllArs";
+export const ClienteForm = ({ handleClose, datos }) => {
+  const { data: listaArs = [] } = useGetAllArs();
+  const { createUser, isCreating } = insertarUsuario(handleClose); //*MUTATE REACT QUERY
 
   const onSubmit = (data) => {
     createUser(data);
   };
 
   const { register, handleSubmit, watch, errors } = useSubmitDataForm({
-    cliente,
+    datos,
   });
   return (
     <div>
@@ -193,9 +194,13 @@ export const ClienteForm = ({ handleClose, cliente }) => {
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="id_Ars"
               >
-                <option>Senasa</option>
-                <option>Humano</option>
-                <option>Palic</option>
+                {listaArs.map((Ars) => {
+                  return (
+                    <option key={Ars.id} value={Ars.id}>
+                      {Ars.nombre_ars}
+                    </option>
+                  );
+                })}
               </select>
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
                 <svg
