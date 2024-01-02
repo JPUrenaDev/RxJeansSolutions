@@ -8,7 +8,8 @@ const RowsStyle = styled.div`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
   background-color: white;
-  width: 100%;
+
+  width: auto;
 `;
 
 const HeaderStyle = styled.div`
@@ -17,16 +18,15 @@ const HeaderStyle = styled.div`
   background-color: #f9fafb;
   padding: 10px;
   font-weight: bold;
-  width: screen;
 `;
 
 const TableStyles = styled.div`
-  width: 100%;
+  width: auto;
 `;
 
 const FooterStyle = styled.div`
   background-color: #f9fafb;
-  width: 100%;
+  width: auto;
 `;
 
 export const Table = ({ children, columns, loading }) => {
@@ -52,7 +52,7 @@ const Rows = ({ data, callback }) => {
   const elementos = useContext(TableContext); //COLUMNAS
   return (
     <RowsStyle className="divide-y  divide-slate-300" columns={elementos}>
-      {data.map(callback)}
+      {data?.map(callback)}
     </RowsStyle>
   );
 };

@@ -15,10 +15,10 @@ export const ElementosDelSidebar = () => {
       <div className="flex flex-col items-center">
         <img src="./public/logo-Farmacia.png " className="h-[100px]" />
         <h1 className="text-center  pt-6 text-white">RxJeansSolutions</h1>
-        <hr className="h-px my-8 md:w-[200px] w-[90px] mb-7  bg-gray-200 border-0 dark:bg-gray-700"></hr>
+        <hr className="h-px my-8 md:w-auto w-auto mb-7  bg-gray-200 border-0 dark:bg-gray-700"></hr>
       </div>
       <nav>
-        <ul className="sideBarItems  flex flex-col md:gap-y-[20px] gap-y-[2px] md:text-[15px] text-[9px]  text-white ml-4 ">
+        <ul className="sideBarItems  flex flex-col md:gap-y-[20px]  md:text-[15px] text-[9px] ml-3  text-white  ">
           <Link to={"Dashboard"} className={classNameItems}>
             <FaChartPie size={26} />
             <span>Dashboard</span>

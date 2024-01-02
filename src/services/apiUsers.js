@@ -20,3 +20,13 @@ export const useInsertUser = async (Clientesinformation) => {
 
   if (data) return data;
 };
+
+export const deleteUser = async (userId) => {
+  console.log(userId);
+  const { error, data } = await supabase
+    .from("clientes")
+    .delete()
+    .eq("id", userId);
+
+  if (data) return data;
+};

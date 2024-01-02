@@ -5,15 +5,14 @@ import { FaEye } from "react-icons/fa";
 import { ModalW } from "../Modal/Modal";
 import styled from "styled-components";
 import { DeleteConfirmation } from "./DeleteConfirmation";
-import { ClienteForm } from "../../features/Clientes/ClienteForm";
 
 const Div = styled.div`
   display: flex;
   align-items: center;
   gap: 2fr;
+  max-width: auto;
 `;
-export const BotonesTable = ({ datos, Form }) => {
-  console.log(datos);
+export const BotonesTable = ({ datos, Form, onConfirm }) => {
   return (
     <Div>
       <ModalW>
@@ -43,7 +42,10 @@ export const BotonesTable = ({ datos, Form }) => {
           </button>
         </ModalW.Open>
         <ModalW.Windows>
-          <DeleteConfirmation />
+          <DeleteConfirmation
+            datos={datos}
+            onConfirm={onConfirm}
+          ></DeleteConfirmation>
         </ModalW.Windows>
       </ModalW>
     </Div>

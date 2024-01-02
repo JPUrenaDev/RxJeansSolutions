@@ -9,7 +9,7 @@ const SideBarStyles = styled.aside`
 export const Sidebar = () => {
   return (
     <>
-      <SideBarStyles className="bg-indigo-500 md:w-[258px] w-[100px] h-screen overflow-auto ">
+      <SideBarStyles className="bg-indigo-500 md:w-auto w-auto h-screen overflow-auto ">
         <ElementosDelSidebar />
       </SideBarStyles>
     </>

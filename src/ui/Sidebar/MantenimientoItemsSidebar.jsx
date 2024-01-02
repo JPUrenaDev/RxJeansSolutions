@@ -10,7 +10,7 @@ import { FaClipboardUser } from "react-icons/fa6";
 import { classNameItems } from "../../../helper/HelperDesign/sideBarClassItems";
 export const MantenimientoItemsSidebar = () => {
   return (
-    <ul className="sideBarItems 0 flex ml-[-20px] flex-col text-[17px] mt-5 text-white ">
+    <ul className="sideBarItems 0 flex  flex-col text-[17px] mb-5 text-white ">
       <Link to={"categorias"} className={classNameItems}>
         <FaTableList />
         Categorias
