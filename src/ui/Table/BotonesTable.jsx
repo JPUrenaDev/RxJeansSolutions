@@ -9,7 +9,7 @@ import { DeleteConfirmation } from "./DeleteConfirmation";
 const Div = styled.div`
   display: flex;
   align-items: center;
-  gap: 2fr;
+  gap: 10px;
   max-width: auto;
 `;
 export const BotonesTable = ({ datos, Form, onConfirm }) => {
@@ -22,7 +22,7 @@ export const BotonesTable = ({ datos, Form, onConfirm }) => {
           </button>
         </ModalW.Open>
         <ModalW.Windows>
-          <Form datos={datos} />
+          <Form datos={datos} mostrarBotones={true} deshabilitarInputs={true} />
         </ModalW.Windows>
       </ModalW>
 
@@ -32,7 +32,9 @@ export const BotonesTable = ({ datos, Form, onConfirm }) => {
             <MdOutlineEdit size={30} />
           </button>
         </ModalW.Open>
-        <ModalW.Windows></ModalW.Windows>
+        <ModalW.Windows>
+          <Form datos={datos} />
+        </ModalW.Windows>
       </ModalW>
 
       <ModalW>

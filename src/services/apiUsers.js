@@ -21,6 +21,19 @@ export const useInsertUser = async (Clientesinformation) => {
   if (data) return data;
 };
 
+export const updateUser = async (datas) => {
+  const { id, created_at, seguros, ...userInformationToUpdate } = datas;
+
+  console.log(userInformationToUpdate);
+  const { data, error } = await supabase
+    .from("clientes")
+    .update(userInformationToUpdate)
+    .eq("id", id)
+    .select();
+
+  if (data) return data;
+};
+
 export const deleteUser = async (userId) => {
   console.log(userId);
   const { error, data } = await supabase

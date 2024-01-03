@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 
 export function useSubmitDataForm({ datos }) {
-  console.log(datos);
   const {
     register,
     handleSubmit,

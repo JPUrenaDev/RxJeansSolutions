@@ -1,29 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useSubmitDataForm } from "../../customHooks/useSubmitDataForm";
 import { RequireFieldFormMessage } from "../../helpers/RequireFieldFormMessage";
 import { insertarUsuario } from "../../customHooks/useInsertUser";
-
+import { useUpdateUser } from "../../customHooks/useUpdateUser";
 import { useGetAllArs } from "../../customHooks/useGetAllArs";
-export const ClienteForm = ({ handleClose, datos }) => {
-  const { data: listaArs = [] } = useGetAllArs();
-  const { createUser, isCreating } = insertarUsuario(handleClose); //*MUTATE REACT QUERY
+import { MdOutlineEdit } from "react-icons/md";
 
-  const onSubmit = (data) => {
-    createUser(data);
+export const ClienteForm = ({
+  handleClose,
+  datos,
+  deshabilitarInputs = false,
+}) => {
+  const { data: listaArs = [] } = useGetAllArs();
+  const { createUser } = insertarUsuario(handleClose); //*CREATE REACT QUERY (MUTATE)
+  const { actualizarUsuario } = useUpdateUser(handleClose); //*UPDATE REACT QUERY (MUTATE)
+  const [activarEdicion, setActivarEdicion] = useState(deshabilitarInputs);
+
+  const onActivarEdicion = () => {
+    setActivarEdicion(!activarEdicion);
   };
 
-  const { register, handleSubmit, watch, errors } = useSubmitDataForm({
+  const onSubmit = (data) => {
+    console.log(data);
+    datos ? actualizarUsuario(data) : createUser(data);
+  };
+
+  const { register, handleSubmit, errors } = useSubmitDataForm({
     datos,
   });
   return (
     <div>
-      <h3
-        onClick={handleClose}
-        className="flex ml-[600px] text-lg w-5 h-5 font-semibold pb-3 cursor-pointer"
-      >
-        x
-      </h3>
+      {activarEdicion && (
+        <button onClick={onActivarEdicion}>
+          <MdOutlineEdit size={30} />
+        </button>
+      )}
+
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -34,6 +47,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Nombre
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Nombres", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
               id="Nombres"
@@ -50,6 +64,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Apellidos
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Apellidos", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Apellidos"
@@ -70,6 +85,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Fecha Nacimiento
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Fecha_Nacimiento", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Fecha_Nacimiento"
@@ -87,6 +103,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Email
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Email", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Email"
@@ -107,6 +124,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Telefono
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Tel", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Tel"
@@ -123,6 +141,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Celular
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Cel", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Cel"
@@ -141,6 +160,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Cedula
             </label>
             <input
+              disabled={activarEdicion}
               {...register("Cedula", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Cedula"
@@ -159,6 +179,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
             </label>
             <div className="relative">
               <select
+                disabled={activarEdicion}
                 {...register("Genero")}
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="Genero"
@@ -187,6 +208,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
             </label>
             <div className="relative">
               <select
+                disabled={activarEdicion}
                 {...register("id_Ars")}
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="id_Ars"
@@ -218,6 +240,7 @@ export const ClienteForm = ({ handleClose, datos }) => {
               Informaciones Adicionales
             </label>
             <textarea
+              disabled={activarEdicion}
               {...register("Notas_Adicionales")}
               className="appearance-none mb-4 block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
               id="Notas_Adicionales"
@@ -226,10 +249,14 @@ export const ClienteForm = ({ handleClose, datos }) => {
             />
           </div>
         </div>
+
         <div className="flex justify-between">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Insertar Usuario
-          </button>
+          {activarEdicion ? null : (
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              {datos ? "Actualizar Usuario" : "Insertar Usuario"}
+            </button>
+          )}
+
           <button
             onClick={handleClose}
             className="bg-orange-600 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded"
