@@ -36,7 +36,7 @@ export const ClientesTable = () => {
         </ButtonMantenimientos>
       </div>
       {data.length >= 1 ? (
-        <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr ">
+        <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr 1fr ">
           <div>
             <Table.Header>
               <div></div>
@@ -44,6 +44,7 @@ export const ClientesTable = () => {
               <div>Apellidos</div>
               <div>Edad</div>
               <div>Seguro Medico</div>
+              <div>Imagen</div>
               <div></div>
             </Table.Header>
 
@@ -58,6 +59,10 @@ export const ClientesTable = () => {
                   <ItemsTableStyle>
                     {clientes.seguros.nombre_ars}
                   </ItemsTableStyle>
+                  <ItemsTableStyle className="w-[100px]">
+                    <img src={clientes.imagen} alt="bucket"></img>
+                  </ItemsTableStyle>
+
                   <BotonesTable
                     datos={clientes}
                     Form={ClienteForm}

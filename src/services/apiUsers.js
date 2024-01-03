@@ -7,16 +7,24 @@ export const getAllClientes = async (a) => {
       nombre_ars
     )
   `);
-  console.log(data);
   return data;
 };
 
 export const useInsertUser = async (Clientesinformation) => {
-  console.log(Clientesinformation);
+  console.log(Clientesinformation.imagen);
+  const imageName = `${Math.random()}-${
+    Clientesinformation.imagen.name
+  }`.replaceAll("/", "");
+  const imagePath = `https://thrqdxpnhykuvzdyiakg.supabase.co/storage/v1/object/public/avatars/${imageName}`;
+  // const { imagen, ...user } = Clientesinformation;
   const { data, error } = await supabase
     .from("clientes")
-    .insert([{ ...Clientesinformation }])
+    .insert([{ ...Clientesinformation, imagen: imagePath }])
     .select();
+
+  const { error: storageError } = await supabase.storage
+    .from("avatars")
+    .upload(imageName, Clientesinformation.imagen);
 
   if (data) return data;
 };
@@ -25,6 +33,7 @@ export const updateUser = async (datas) => {
   const { id, created_at, seguros, ...userInformationToUpdate } = datas;
 
   console.log(userInformationToUpdate);
+
   const { data, error } = await supabase
     .from("clientes")
     .update(userInformationToUpdate)

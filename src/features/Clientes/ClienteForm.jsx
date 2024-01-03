@@ -22,8 +22,9 @@ export const ClienteForm = ({
   };
 
   const onSubmit = (data) => {
-    console.log(data);
-    datos ? actualizarUsuario(data) : createUser(data);
+    datos
+      ? actualizarUsuario(data)
+      : createUser({ ...data, imagen: data.imagen[0] });
   };
 
   const { register, handleSubmit, errors } = useSubmitDataForm({
@@ -247,6 +248,34 @@ export const ClienteForm = ({
               type="text"
               placeholder="Informaciones Adicionales:"
             />
+          </div>
+          <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="imagen"
+            >
+              imagen
+            </label>
+            {!activarEdicion ? (
+              <input
+                disabled={activarEdicion}
+                {...register("imagen")}
+                className="appearance-none mb-4 block w-full  rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="imagen"
+                type="file"
+                accept="image/*"
+                placeholder="Informaciones Adicionales:"
+              />
+            ) : (
+              <img
+                src={datos?.imagen}
+                {...register("imagen")}
+                className="appearance-none mb-4 w-[200px]   rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="imagen"
+                accept="image/*"
+                placeholder="Informaciones Adicionales:"
+              ></img>
+            )}
           </div>
         </div>
 
