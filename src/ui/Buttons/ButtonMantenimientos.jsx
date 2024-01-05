@@ -6,7 +6,7 @@ export const ButtonMantenimientos = ({ children, Form }) => {
   return (
     <ModalW>
       <ModalW.Open>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold md:w-[140px] mb-[70px]  px-2  h-20   rounded">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold md:w-[140px] mb-[70px]  px-2  h-12 rounded">
           {children}
         </button>
       </ModalW.Open>

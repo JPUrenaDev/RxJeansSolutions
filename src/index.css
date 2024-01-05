@@ -9,3 +9,12 @@
 a:link {
   text-decoration: none;
 }
+
+body {
+  background: rgba(236, 236, 238, 255);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}

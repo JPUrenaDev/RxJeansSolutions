@@ -8,37 +8,53 @@ import { FaBasketShopping } from "react-icons/fa6";
 import { FaHive } from "react-icons/fa6";
 import { FaClipboardUser } from "react-icons/fa6";
 import { classNameItems } from "../../../helper/HelperDesign/sideBarClassItems";
+import styled from "styled-components";
+
+const LinkStyle = styled(Link)`
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  width: 250px;
+  padding: 8px;
+  transition: all 0.3s; /* Agregando la transición aquí */
+  &:hover {
+    background-color: #408efd; /* Fondo azul al pasar el ratón sobre el enlace */
+    border-radius: 0.375rem; /* Radio de borde redondeado al pasar el ratón sobre el enlace */
+    color: #fff; /* Texto blanco al pasar el ratón sobre el enlace */
+  }
+`;
+
 export const MantenimientoItemsSidebar = () => {
   return (
-    <ul className="sideBarItems 0 flex  flex-col text-[17px] mb-5 text-white ">
-      <Link to={"categorias"} className={classNameItems}>
+    <ul className="sideBarItems 0 flex  flex-col text-[17px] mb-5  ">
+      <LinkStyle to={"categorias"} className={classNameItems}>
         <FaTableList />
         Categorias
-      </Link>
-      <Link to={"seguros"} className={classNameItems}>
+      </LinkStyle>
+      <LinkStyle to={"seguros"} className={classNameItems}>
         <FaAddressCard />
         Seguros Medicos
-      </Link>
-      <Link to={"clientes"} className={classNameItems}>
+      </LinkStyle>
+      <LinkStyle to={"clientes"} className={classNameItems}>
         <FaUserPlus />
         Clientes
-      </Link>
-      <Link to={"empleados"} className={classNameItems}>
+      </LinkStyle>
+      <LinkStyle to={"empleados"} className={classNameItems}>
         <FaClipboardUser />
         Empleados
-      </Link>
-      <Link to={"Dashboard"} className={classNameItems}>
+      </LinkStyle>
+      <LinkStyle to={"Dashboard"} className={classNameItems}>
         <FaHive />
         Productos
-      </Link>
-      <Link to={"Dashboard"} className={classNameItems}>
+      </LinkStyle>
+      <LinkStyle to={"Dashboard"} className={classNameItems}>
         <FaBasketShopping />
         Inventario
-      </Link>
-      <Link to={"Dashboard"} className={classNameItems}>
+      </LinkStyle>
+      <LinkStyle to={"Dashboard"} className={classNameItems}>
         <FaHospitalUser />
         Proveedores
-      </Link>
+      </LinkStyle>
     </ul>
   );
 };

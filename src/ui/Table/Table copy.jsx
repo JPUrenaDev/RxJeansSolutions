@@ -3,7 +3,7 @@ import { TableContext } from "../../../context/tableContext";
 import styled from "styled-components";
 import { PaginationTable } from "./PaginationTable";
 import { Spinner } from "../Spinner";
-//la que estoy modifcando.
+
 const RowsStyle = styled.div`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
@@ -15,33 +15,27 @@ const RowsStyle = styled.div`
 const HeaderStyle = styled.div`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
-  background-color: #ededed;
+  background-color: #f9fafb;
   padding: 10px;
   font-weight: bold;
 `;
 
-const TableStyles = styled.div``;
+const TableStyles = styled.div`
+  width: auto;
+`;
 
 const FooterStyle = styled.div`
-  background-color: #ededed;
+  background-color: #f9fafb;
+  width: auto;
 `;
 
 export const Table = ({ children, columns, loading }) => {
   return loading ? (
     <Spinner />
   ) : (
-    <>
-      <div className="border h-[70px]">
-        <div>
-          <h1>Todos los clientes</h1> <div>58 clientes</div>
-        </div>
-      </div>
-      <TableStyles className="border">
-        <TableContext.Provider value={columns}>
-          {children}
-        </TableContext.Provider>
-      </TableStyles>
-    </>
+    <TableStyles className="border-2 border-gray">
+      <TableContext.Provider value={columns}>{children}</TableContext.Provider>
+    </TableStyles>
   );
 };
 

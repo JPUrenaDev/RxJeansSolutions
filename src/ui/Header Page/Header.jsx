@@ -4,17 +4,17 @@ import ElementosDelHeader from "./ElementosDelHeader";
 
 const HeaderStyle = styled.header`
   grid-column: 2/-1;
-  background-color: rgb(99 102 241);
-  height: "auto";
+  background-color: white;
+
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const Header = () => {
   return (
     <>
-      <HeaderStyle>
+      <HeaderStyle className="border">
         <ElementosDelHeader />
       </HeaderStyle>
     </>

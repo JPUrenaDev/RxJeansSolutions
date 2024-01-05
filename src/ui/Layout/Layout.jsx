@@ -1,14 +1,13 @@
 import React from "react";
 import { Sidebar } from "../Sidebar/Sidebar";
 import { Outlet } from "react-router-dom";
-
+import { Footer } from "../Footer/Footer";
 import styled from "styled-components";
 import { Header } from "../Header Page/Header";
 const Section = styled.section`
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: 100px 57rem;
+  grid-template-columns: 300px 3fr;
 `;
 
 const Main = styled.main`
@@ -16,7 +15,6 @@ const Main = styled.main`
   padding: 4rem 4.8rem 6.4rem;
   grid-column: 2/-1;
   grid-row: 2/-1;
-
   overflow: scroll; //LO QUE HACE ESTO ES QUE EL COMPONENTE QUE CONTENGA ESTO O LOS COMPONENTES,
   //TODO LO OTRO SE QUEDARA ESTATICO, ESTE ES EL UNICO QUE SE MOVERA.
 `;

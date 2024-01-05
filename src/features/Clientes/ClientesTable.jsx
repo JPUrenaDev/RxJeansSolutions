@@ -14,7 +14,7 @@ import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 import { ClienteForm } from "./ClienteForm";
 import { useDeleteUser } from "../../customHooks/useDeleteUser";
 //AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
-
+import { IoCloudDownloadOutline } from "react-icons/io5";
 export const ClientesTable = () => {
   const { data = [], isLoading } = useGetAllUsers();
   const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
@@ -30,10 +30,15 @@ export const ClientesTable = () => {
         <h1 className="font-semibold text-xl mb-[70px] tracking-wide">
           CLIENTES
         </h1>
-        <ButtonMantenimientos Form={ClienteForm}>
-          {" "}
-          Agregar Nuevo Cliente
-        </ButtonMantenimientos>
+        <div className="flex gap-3">
+          <button className="bg-transparent h-12  hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py- px-4 border border-blue-500 hover:border-transparent rounded">
+            <IoCloudDownloadOutline className="inline-block mr-2 " />
+            Exportar PDF
+          </button>
+          <ButtonMantenimientos Form={ClienteForm}>
+            + Nuevo Cliente
+          </ButtonMantenimientos>
+        </div>
       </div>
       {data.length >= 1 ? (
         <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr 1fr ">
