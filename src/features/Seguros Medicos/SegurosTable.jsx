@@ -12,6 +12,7 @@ import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 export const SegurosTable = () => {
   const { data: seguros = [], isLoading } = useGetAllArs();
 
+  console.log(seguros);
   const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
     usePagination(seguros);
 
@@ -34,7 +35,7 @@ export const SegurosTable = () => {
         </Table.Header>
 
         <Table.Rows
-          data={ArrayPaginado}
+          data={seguros}
           callback={(ARS) => (
             <>
               <ItemsTableStyle>{ARS.id}</ItemsTableStyle>

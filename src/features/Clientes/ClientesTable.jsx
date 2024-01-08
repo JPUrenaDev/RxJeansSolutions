@@ -1,5 +1,3 @@
-import { useSearchParams } from "react-router-dom";
-
 import { Table } from "../../ui/Table/Table";
 import { BotonesTable } from "../../ui/Table/BotonesTable";
 
@@ -13,14 +11,23 @@ import { Spinner } from "../../ui/Spinner";
 import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 import { ClienteForm } from "./ClienteForm";
 import { useDeleteUser } from "../../customHooks/useDeleteUser";
-//AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
-import { IoCloudDownloadOutline } from "react-icons/io5";
-export const ClientesTable = () => {
-  const { data = [], isLoading } = useGetAllUsers();
-  const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
-    usePagination(data, isLoading);
+import { useState } from "react";
 
-  const { deleteUserMutate } = useDeleteUser(data.id);
+//AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
+
+import { IoCloudDownloadOutline } from "react-icons/io5";
+
+export const ClientesTable = () => {
+  const { isLoading, userData, count } = useGetAllUsers();
+
+  const { totalPages, TotalItems, firstElement, lastElement } = usePagination(
+    count, //esto lo estoy sacando de supabase (es el count de elementos.)
+    isLoading
+  );
+
+  console.log(userData);
+
+  const { deleteUserMutate } = useDeleteUser(userData?.id);
 
   return isLoading ? (
     <Spinner />
@@ -40,39 +47,58 @@ export const ClientesTable = () => {
           </ButtonMantenimientos>
         </div>
       </div>
-      {data.length >= 1 ? (
-        <Table loading={isLoading} columns="100px 1fr 1fr 1fr 1fr 1fr 1fr ">
+      {count >= 1 ? (
+        <Table loading={isLoading} columns=" 1fr 1fr 1fr 1fr 1fr 1fr 1fr">
           <div>
             <Table.Header>
-              <div></div>
               <div>Nombre</div>
               <div>Apellidos</div>
               <div>Edad</div>
-              <div>Seguro Medico</div>
+              <div>ARS</div>
+              <div>Estatus</div>
               <div>Imagen</div>
               <div></div>
             </Table.Header>
 
             <Table.Rows
-              data={ArrayPaginado}
+              data={userData}
               callback={(clientes) => (
                 <>
-                  <ItemsTableStyle>{clientes.id}</ItemsTableStyle>
                   <ItemsTableStyle>{clientes.Nombres}</ItemsTableStyle>
                   <ItemsTableStyle>{clientes.Apellidos}</ItemsTableStyle>
                   <ItemsTableStyle>{clientes.Fecha_Nacimiento}</ItemsTableStyle>
                   <ItemsTableStyle>
                     {clientes.seguros.nombre_ars}
                   </ItemsTableStyle>
-                  <ItemsTableStyle className="w-[100px]">
-                    <img src={clientes.imagen} alt="bucket"></img>
+                  <ItemsTableStyle>
+                    <div className=" ">
+                      <span>
+                        {clientes.status ? (
+                          <h1 className="w-[60px] rounded-lg p-1 flex justify-center bg-lime-500">
+                            Activo
+                          </h1>
+                        ) : (
+                          <h1 className="w-[110px] rounded-lg p-1 flex justify-center bg-red-700">
+                            Deshabilitado
+                          </h1>
+                        )}
+                      </span>
+                    </div>
                   </ItemsTableStyle>
-
-                  <BotonesTable
-                    datos={clientes}
-                    Form={ClienteForm}
-                    onConfirm={() => deleteUserMutate(clientes.id)}
-                  />
+                  <ItemsTableStyle>
+                    <img
+                      className="w-[50px] h-[40px]"
+                      src={clientes.imagen}
+                      alt="bucket"
+                    ></img>
+                  </ItemsTableStyle>
+                  <ItemsTableStyle>
+                    <BotonesTable
+                      datos={clientes}
+                      Form={ClienteForm}
+                      onConfirm={() => deleteUserMutate(clientes.id)}
+                    />
+                  </ItemsTableStyle>
                 </>
               )}
             />

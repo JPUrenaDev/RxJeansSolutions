@@ -15,6 +15,7 @@ import { ToggleItemsButton } from "./ToggleItemsButton";
 import { toggleButtonClasses } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
+
 const SideBarStyles = styled.aside`
   grid-row: 1/-1;
 `;
@@ -23,8 +24,10 @@ const LinkStyle = styled(Link)`
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
-  width: 250px;
+  width: 200px;
   padding: 8px;
+  font-size: 14px;
+
   transition: all 0.3s; /* Agregando la transición aquí */
   &:hover {
     background-color: #408efd; /* Fondo azul al pasar el ratón sobre el enlace */
@@ -45,9 +48,9 @@ const Div = styled.div`
 export const Sidebar = () => {
   return (
     <>
-      <Div className="w-full bg-white pl-3   duration-300 ">
+      <Div className="w-full  pl-3 ">
         <aside>
-          <div className="mb-7 mt-4 w-[200px]">
+          <div className="mb-7 mt-4 w-[200px] ">
             <img src="./public/logo-page.png" />
           </div>
           <div className="w-[170px] mb-3">
@@ -64,22 +67,22 @@ export const Sidebar = () => {
               <ToggleItemsButton.ShowOptions>
                 <ul className=" text-black">
                   <LinkStyle to={"Dashboard"}>
-                    <RxDashboard size={26} />
+                    <RxDashboard size={20} />
                     <TextItemsStyle>Dashboard</TextItemsStyle>
                   </LinkStyle>
 
                   <LinkStyle to={"Ventas"}>
-                    <TbBusinessplan size={26} />
+                    <TbBusinessplan size={20} />
                     <TextItemsStyle>Ventas</TextItemsStyle>
                   </LinkStyle>
 
                   <LinkStyle>
-                    <FaWhmcs size={26} />
+                    <FaWhmcs size={20} />
                     <TextItemsStyle>Configuración</TextItemsStyle>
                   </LinkStyle>
 
                   <LinkStyle>
-                    <FaWhmcs size={26} />
+                    <FaWhmcs size={20} />
                     <TextItemsStyle>Ordenes</TextItemsStyle>
                   </LinkStyle>
                 </ul>

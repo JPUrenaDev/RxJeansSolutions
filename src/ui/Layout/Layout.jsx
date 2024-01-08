@@ -7,11 +7,11 @@ import { Header } from "../Header Page/Header";
 const Section = styled.section`
   display: grid;
   grid-template-rows: 100px 57rem;
-  grid-template-columns: 300px 3fr;
+  grid-template-columns: 250px 3fr;
 `;
 
 const Main = styled.main`
-  background-color: #f9fafb;
+  background-color: white;
   padding: 4rem 4.8rem 6.4rem;
   grid-column: 2/-1;
   grid-row: 2/-1;

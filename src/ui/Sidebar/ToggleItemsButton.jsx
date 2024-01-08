@@ -25,7 +25,7 @@ export const TriggerOptions = ({ title, ButtonNotOpened, ButtonOpened }) => {
     setDespliegueDropDown((pastValue) => !pastValue);
   };
   return (
-    <div className="flex items-center mb-4 pl-2 justify-between w-[250px]">
+    <div className="flex items-center mb-4 pl-2 justify-between w-[200px]">
       <h6 className="font-bold text-gray-500 text-xs">{title}</h6>
       <button onClick={onActivateMenu}>
         {despliegueDropDown ? <ButtonNotOpened /> : <ButtonOpened />}

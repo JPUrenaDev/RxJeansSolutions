@@ -14,8 +14,9 @@ const LinkStyle = styled(Link)`
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
-  width: 250px;
+  width: 200px;
   padding: 8px;
+  font-size: 14px;
   transition: all 0.3s; /* Agregando la transición aquí */
   &:hover {
     background-color: #408efd; /* Fondo azul al pasar el ratón sobre el enlace */
@@ -26,7 +27,7 @@ const LinkStyle = styled(Link)`
 
 export const MantenimientoItemsSidebar = () => {
   return (
-    <ul className="sideBarItems 0 flex  flex-col text-[17px] mb-5  ">
+    <ul className="sideBarItems 0 flex  flex-col  mb-5  ">
       <LinkStyle to={"categorias"} className={classNameItems}>
         <FaTableList />
         Categorias

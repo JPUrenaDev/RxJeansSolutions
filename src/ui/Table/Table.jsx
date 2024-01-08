@@ -3,27 +3,28 @@ import { TableContext } from "../../../context/tableContext";
 import styled from "styled-components";
 import { PaginationTable } from "./PaginationTable";
 import { Spinner } from "../Spinner";
+
+import { SearchWithFilters } from "./SearchWithFilters";
 //la que estoy modifcando.
 const RowsStyle = styled.div`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
-  background-color: white;
-
-  width: auto;
 `;
 
 const HeaderStyle = styled.div`
   display: grid;
   grid-template-columns: ${(props) => props.columns};
-  background-color: #ededed;
+  background-color: #e8e8e8;
   padding: 10px;
+
   font-weight: bold;
+  color: gray;
 `;
 
 const TableStyles = styled.div``;
 
 const FooterStyle = styled.div`
-  background-color: #ededed;
+  background-color: #f9fafb;
 `;
 
 export const Table = ({ children, columns, loading }) => {
@@ -31,12 +32,18 @@ export const Table = ({ children, columns, loading }) => {
     <Spinner />
   ) : (
     <>
-      <div className="border h-[70px]">
-        <div>
-          <h1>Todos los clientes</h1> <div>58 clientes</div>
+      <div className="border-gray-400 border rounded-md pt-4 pl-5 h-[90px]">
+        <div className="flex gap-4 justify-between items-center">
+          <div className="flex gap-4 items-center">
+            <h1 className="font-semibold">Todos los clientes</h1>{" "}
+            <div className="border flex justify-center">
+              <span className="px-3">59 clientes</span>
+            </div>
+            <SearchWithFilters />
+          </div>
         </div>
       </div>
-      <TableStyles className="border">
+      <TableStyles className="border-gray-400 rounded-md border">
         <TableContext.Provider value={columns}>
           {children}
         </TableContext.Provider>
@@ -47,17 +54,14 @@ export const Table = ({ children, columns, loading }) => {
 
 const Header = ({ children }) => {
   const elementos = useContext(TableContext);
-  return (
-    <HeaderStyle className="  border-b-4 border-slate-300" columns={elementos}>
-      {children}
-    </HeaderStyle>
-  );
+  return <HeaderStyle columns={elementos}>{children}</HeaderStyle>;
 };
 
 const Rows = ({ data, callback }) => {
   const elementos = useContext(TableContext); //COLUMNAS
+  console.log(data);
   return (
-    <RowsStyle className="divide-y  divide-slate-300" columns={elementos}>
+    <RowsStyle className="text-blue divide-y  divide-grey" columns={elementos}>
       {data?.map(callback)}
     </RowsStyle>
   );

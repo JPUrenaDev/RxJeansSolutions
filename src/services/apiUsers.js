@@ -1,13 +1,13 @@
 import supabase from "./supabase";
 
-export const getAllClientes = async (a) => {
-  const { data, errors } = await supabase.from("clientes").select(`
-    *,
-    seguros (
-      nombre_ars
-    )
-  `);
-  return data;
+export const getAllClientes = async ({ firstElement, lastElement }) => {
+  const query = supabase
+    .from("clientes")
+    .select("*,seguros(nombre_ars)", { count: "exact" });
+  query.range(firstElement, lastElement);
+  const { data, count } = await query;
+
+  return { data, count };
 };
 
 export const useInsertUser = async (Clientesinformation) => {
@@ -25,7 +25,6 @@ export const useInsertUser = async (Clientesinformation) => {
   const { error: storageError } = await supabase.storage
     .from("avatars")
     .upload(imageName, Clientesinformation.imagen);
-
   if (data) return data;
 };
 

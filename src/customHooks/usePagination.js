@@ -1,9 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import { ITEMSXPAGE } from "../helpers/itemsXPage";
 export const usePagination = (data, loading) => {
-  console.log(data?.length);
-  const totalPages = Math.ceil(data?.length / ITEMSXPAGE);
-  const TotalItems = data?.length;
+  const totalPages = Math.ceil(data / ITEMSXPAGE);
+  const TotalItems = data;
 
   const [searchParams] = useSearchParams();
 
@@ -13,13 +12,14 @@ export const usePagination = (data, loading) => {
 
   const firstElement = PaginaActual * ITEMSXPAGE - ITEMSXPAGE;
   const lastElement = PaginaActual * ITEMSXPAGE;
-  const ArrayPaginado = data?.slice(firstElement, lastElement);
+
+  console.log(firstElement, lastElement, PaginaActual);
+  //const ArrayPaginado = data?.slice(firstElement, lastElement);
 
   return {
     PaginaActual,
     firstElement,
     lastElement,
-    ArrayPaginado,
     totalPages,
     TotalItems,
   };

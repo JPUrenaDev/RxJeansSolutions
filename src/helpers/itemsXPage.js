@@ -1,1 +1,1 @@
-export const ITEMSXPAGE = 10;
+export const ITEMSXPAGE = 4;
