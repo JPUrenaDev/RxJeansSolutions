@@ -12,6 +12,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { Login } from "./ui/login/Login";
 
 const query = new QueryClient({
   defaultOptions: {
@@ -21,6 +22,10 @@ const query = new QueryClient({
   },
 });
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/",
     element: <Layout />,
