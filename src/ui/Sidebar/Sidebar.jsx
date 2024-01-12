@@ -23,7 +23,7 @@ const SideBarStyles = styled.aside`
 const LinkStyle = styled(Link)`
   display: flex;
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 4px;
   width: 200px;
   padding: 8px;
   font-size: 14px;

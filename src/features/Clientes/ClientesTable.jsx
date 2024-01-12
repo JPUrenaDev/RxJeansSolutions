@@ -1,21 +1,26 @@
 import { Table } from "../../ui/Table/Table";
 import { BotonesTable } from "../../ui/Table/BotonesTable";
-
 import { ItemsTableStyle } from "../../helpers/stylesReutilizables";
-
 import { PaginationContext } from "../../../context/paginationContext";
 import { usePagination } from "../../customHooks/usePagination";
-
 import { useGetAllUsers } from "../../customHooks/useGetAllUser";
 import { Spinner } from "../../ui/Spinner";
 import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 import { ClienteForm } from "./ClienteForm";
 import { useDeleteUser } from "../../customHooks/useDeleteUser";
-import { useState } from "react";
 
 //AQUI DEBO PASAR LA FUNCION CON EL MAP, COMO DIJO JONAS.
 
 import { IoCloudDownloadOutline } from "react-icons/io5";
+import styled from "styled-components";
+
+const H1 = styled.h1`
+  background-color: #74ffe5;
+`;
+
+const H1Desactivado = styled.h1`
+  background-color: #fe754b;
+`;
 
 export const ClientesTable = () => {
   const { isLoading, userData, count } = useGetAllUsers();
@@ -24,8 +29,6 @@ export const ClientesTable = () => {
     count, //esto lo estoy sacando de supabase (es el count de elementos.)
     isLoading
   );
-
-  console.log(userData);
 
   const { deleteUserMutate } = useDeleteUser(userData?.id);
 
@@ -74,13 +77,13 @@ export const ClientesTable = () => {
                     <div className=" ">
                       <span>
                         {clientes.status ? (
-                          <h1 className="w-[60px] rounded-lg p-1 flex justify-center bg-lime-500">
+                          <H1 className="w-[60px] rounded-lg p-1 flex justify-center bg-lime-500">
                             Activo
-                          </h1>
+                          </H1>
                         ) : (
-                          <h1 className="w-[110px] rounded-lg p-1 flex justify-center bg-red-700">
+                          <H1Desactivado className="w-[110px] rounded-lg p-1 flex justify-center bg-red-700">
                             Deshabilitado
-                          </h1>
+                          </H1Desactivado>
                         )}
                       </span>
                     </div>

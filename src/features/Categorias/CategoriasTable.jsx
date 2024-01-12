@@ -11,9 +11,12 @@ import { CategoriaForm } from "./CategoriaForm";
 import { reducirTexto } from "../../helpers/reducirTexto";
 
 export const CategoriasTable = () => {
-  const { data: Categorias = [] } = useGetAllCategories();
-  const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
-    usePagination(Categorias);
+  const { data: Categorias = [], count } = useGetAllCategories();
+  const { totalPages, TotalItems, firstElement, lastElement } =
+    usePagination(count);
+
+  console.log(totalPages, TotalItems, firstElement, lastElement);
+  console.log(Categorias);
 
   return (
     <>

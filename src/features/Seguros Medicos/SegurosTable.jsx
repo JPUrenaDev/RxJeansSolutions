@@ -10,11 +10,13 @@ import { SegurosForm } from "./SegurosForm";
 import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
 
 export const SegurosTable = () => {
-  const { data: seguros = [], isLoading } = useGetAllArs();
-
+  const { data: seguros = [], isLoading, count } = useGetAllArs();
   console.log(seguros);
-  const { totalPages, TotalItems, firstElement, lastElement, ArrayPaginado } =
-    usePagination(seguros);
+
+  const { totalPages, TotalItems, firstElement, lastElement } = usePagination(
+    count,
+    isLoading
+  );
 
   return (
     <>
@@ -23,33 +25,37 @@ export const SegurosTable = () => {
           SEGUROS MEDICOS
         </h1>
         <ButtonMantenimientos Form={SegurosForm}>
-          {" "}
           Agregar Nueva ARS
         </ButtonMantenimientos>
       </div>
-      <Table columns={"100px 4fr 1fr "}>
-        <Table.Header>
-          <div></div>
-          <div>Nombre ARS</div>
-          <div></div>
-        </Table.Header>
+      {count >= 1 ? (
+        <Table columns={"100px 4fr 1fr "}>
+          <Table.Header>
+            <div></div>
+            <div>Nombre ARS</div>
+            <div></div>
+          </Table.Header>
 
-        <Table.Rows
-          data={seguros}
-          callback={(ARS) => (
-            <>
-              <ItemsTableStyle>{ARS.id}</ItemsTableStyle>
-              <ItemsTableStyle>{ARS.nombre_ars}</ItemsTableStyle>
-              <BotonesTable datos={ARS} Form={SegurosForm} />
-            </>
-          )}
-        />
-        <PaginationContext.Provider
-          value={{ firstElement, lastElement, TotalItems, totalPages }}
-        >
-          <Table.Footer />
-        </PaginationContext.Provider>
-      </Table>
+          <Table.Rows
+            data={seguros}
+            callback={(ARS) => (
+              <>
+                {console.log(ARS)}
+                <ItemsTableStyle>{ARS.id}</ItemsTableStyle>
+                <ItemsTableStyle>{ARS.nombre_ars}</ItemsTableStyle>
+                <BotonesTable datos={ARS} Form={SegurosForm} />
+              </>
+            )}
+          />
+          <PaginationContext.Provider
+            value={{ firstElement, lastElement, TotalItems, totalPages }}
+          >
+            <Table.Footer />
+          </PaginationContext.Provider>
+        </Table>
+      ) : (
+        <h1>NO HAY ARS REGISTRADAS</h1>
+      )}
     </>
   );
 };

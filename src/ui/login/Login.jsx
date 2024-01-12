@@ -11,10 +11,13 @@ export const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-
     const datos = { email, pass };
-    console.log(datos);
-    mutate(datos);
+    mutate(datos, {
+      onSettled: () => {
+        setEmail("");
+        setPass("");
+      },
+    });
     console.log(data);
   };
   return (

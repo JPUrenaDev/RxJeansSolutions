@@ -5,13 +5,16 @@ export const DeleteConfirmation = ({ handleClose, datos, onConfirm }) => {
     <>
       Are you sure to delete it?{" "}
       <button
-        onClick={onConfirm}
+        onClick={() => {
+          onConfirm();
+          handleClose();
+        }}
         className="bg-red-700 mx-3 text-white font-bold py-2 px-4 border border-blue-700 rounded"
       >
         Delete
       </button>
       <button
-        onClick={() => handleClose()}
+        onClick={handleClose}
         className="bg-blue-700 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded"
       >
         Cancel

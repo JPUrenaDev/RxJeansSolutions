@@ -13,7 +13,7 @@ import styled from "styled-components";
 const LinkStyle = styled(Link)`
   display: flex;
   gap: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 3px;
   width: 200px;
   padding: 8px;
   font-size: 14px;
@@ -27,7 +27,7 @@ const LinkStyle = styled(Link)`
 
 export const MantenimientoItemsSidebar = () => {
   return (
-    <ul className="sideBarItems 0 flex  flex-col  mb-5  ">
+    <ul className="sideBarItems 0 flex  flex-col">
       <LinkStyle to={"categorias"} className={classNameItems}>
         <FaTableList />
         Categorias
@@ -44,15 +44,15 @@ export const MantenimientoItemsSidebar = () => {
         <FaClipboardUser />
         Empleados
       </LinkStyle>
-      <LinkStyle to={"Dashboard"} className={classNameItems}>
+      <LinkStyle to={"productos"} className={classNameItems}>
         <FaHive />
         Productos
       </LinkStyle>
-      <LinkStyle to={"Dashboard"} className={classNameItems}>
+      <LinkStyle to={"inventario"} className={classNameItems}>
         <FaBasketShopping />
         Inventario
       </LinkStyle>
-      <LinkStyle to={"Dashboard"} className={classNameItems}>
+      <LinkStyle to={"proovedores"} className={classNameItems}>
         <FaHospitalUser />
         Proveedores
       </LinkStyle>

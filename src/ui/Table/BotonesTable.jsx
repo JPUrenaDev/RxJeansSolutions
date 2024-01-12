@@ -12,12 +12,12 @@ const Div = styled.div`
   gap: 10px;
   max-width: auto;
 `;
-export const BotonesTable = ({ datos, Form, onConfirm }) => {
+export const BotonesTable = ({ datos = {}, Form = {}, onConfirm }) => {
   return (
     <Div>
       <ModalW>
         <ModalW.Open>
-          <button>
+          <button className="bg-blue-500 text-white font-bold py-1 px-2 rounded">
             <FaEye size={30} />
           </button>
         </ModalW.Open>
@@ -28,7 +28,7 @@ export const BotonesTable = ({ datos, Form, onConfirm }) => {
 
       <ModalW>
         <ModalW.Open>
-          <button>
+          <button className="bg-green-500 text-white font-bold py-1 px-2 rounded">
             <MdOutlineEdit size={30} />
           </button>
         </ModalW.Open>
@@ -39,7 +39,7 @@ export const BotonesTable = ({ datos, Form, onConfirm }) => {
 
       <ModalW>
         <ModalW.Open>
-          <button>
+          <button className="bg-red-500 text-white font-bold py-1 px-2 rounded">
             <AiOutlineDelete size={30} />
           </button>
         </ModalW.Open>

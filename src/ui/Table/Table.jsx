@@ -58,8 +58,9 @@ const Header = ({ children }) => {
 };
 
 const Rows = ({ data, callback }) => {
-  const elementos = useContext(TableContext); //COLUMNAS
   console.log(data);
+  const elementos = useContext(TableContext); //COLUMNAS
+
   return (
     <RowsStyle className="text-blue divide-y  divide-grey" columns={elementos}>
       {data?.map(callback)}
