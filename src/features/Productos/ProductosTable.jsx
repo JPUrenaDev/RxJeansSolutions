@@ -40,7 +40,7 @@ export const ProductosTable = () => {
               <h1>{productos.barcode}</h1>
               <h1>{productos.categorias.nombre_categoria}</h1>
               <h1>{productos.proveedores.nombre}</h1>
-              <img>{productos.imagen}</img>
+              <img></img>
               <BotonesTable datos={productos} Form={ProductosForm} />
             </>
           )}

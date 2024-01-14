@@ -3,21 +3,19 @@ import { useSubmitDataForm } from "../../customHooks/useSubmitDataForm";
 import { RequireFieldFormMessage } from "../../helpers/RequireFieldFormMessage";
 import { insertarUsuario } from "../../customHooks/useInsertUser";
 import { useUpdateUser } from "../../customHooks/useUpdateUser";
-import { useGetAllArs } from "../../customHooks/useGetAllArs";
 import { MdOutlineEdit } from "react-icons/md";
 import { useState } from "react";
-
 import { useGetAllCategories } from "../../customHooks/useGetAllCategories";
 import { useGetAllProveedores } from "../../customHooks/useGetAllProveedores";
-
+import { useInsertProduct } from "../../customHooks/useInsertProductos";
 export const ProductosForm = ({
   handleClose,
   datos,
   deshabilitarInputs = false,
 }) => {
+  const { addProductMutate } = useInsertProduct();
   const { data: categorias } = useGetAllCategories();
   const { data: proveedor } = useGetAllProveedores();
-
   const { createUser } = insertarUsuario(handleClose); //*CREATE REACT QUERY (MUTATE)
   const { actualizarUsuario } = useUpdateUser(handleClose); //*UPDATE REACT QUERY (MUTATE)
   const [activarEdicion, setActivarEdicion] = useState(deshabilitarInputs);
@@ -27,9 +25,7 @@ export const ProductosForm = ({
   };
 
   const onSubmit = (data) => {
-    datos
-      ? actualizarUsuario(data)
-      : createUser({ ...data, imagen: data.imagen[0] });
+    addProductMutate(data);
   };
 
   const { register, handleSubmit, errors } = useSubmitDataForm({
@@ -48,53 +44,53 @@ export const ProductosForm = ({
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Nombres"
+              htmlFor="nombre_producto"
             >
               Nombre Producto
             </label>
             <input
               disabled={activarEdicion}
-              {...register("Nombres", { required: true })}
+              {...register("nombre_producto", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-              id="Nombres"
+              id="nombre_producto"
               type="text"
               placeholder="Jane"
             />
-            {errors.Nombres?.type === "required" && <RequireFieldFormMessage />}
+            {errors.id_categoria?.type === "required" && (
+              <RequireFieldFormMessage />
+            )}
           </div>
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Apellidos"
+              htmlFor="barcode"
             >
               Codigo Barra
             </label>
             <input
               disabled={activarEdicion}
-              {...register("Apellidos", { required: true })}
+              {...register("barcode", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Apellidos"
+              id="barcode"
               type="text"
               placeholder="Doe"
             />
-            {errors.Apellidos?.type === "required" && (
-              <RequireFieldFormMessage />
-            )}
+            {errors.barcode?.type === "required" && <RequireFieldFormMessage />}
           </div>
         </div>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Fecha_Nacimiento"
+              htmlFor="fecha_vencimiento"
             >
               Fecha Vencimiento
             </label>
             <input
               disabled={activarEdicion}
-              {...register("Fecha_Nacimiento", { required: true })}
+              {...register("fecha_vencimiento", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Fecha_Nacimiento"
+              id="fecha_vencimiento"
               type="date"
             />
             {errors.Fecha_Nacimiento?.type === "required" && (
@@ -104,122 +100,34 @@ export const ProductosForm = ({
           <div className="w-full md:w-1/2 px-3">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Email"
+              htmlFor="precio_unitario"
             >
               Precio Unitario
             </label>
             <input
               disabled={activarEdicion}
-              {...register("Email", { required: true })}
+              {...register("precio_unitario", { required: true })}
               className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Email"
-              type="email"
-              placeholder="youremail@hotmail.com"
+              id="precio_unitario"
+              min={1}
+              type="number"
+              placeholder="$0.0"
             />
 
-            {errors.Email?.type === "required" && <RequireFieldFormMessage />}
+            {errors.precioUnitario?.type === "required" && (
+              <RequireFieldFormMessage />
+            )}
           </div>
         </div>
 
-        <div className="flex flex-wrap -mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Tel"
-            >
-              Telefono
-            </label>
-            <input
-              disabled={activarEdicion}
-              {...register("Tel", { required: true })}
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Tel"
-              type="tel"
-              placeholder="809-000-0000"
-            />
-            {errors.Tel?.type === "required" && <RequireFieldFormMessage />}
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Cel"
-            >
-              Celular
-            </label>
-            <input
-              disabled={activarEdicion}
-              {...register("Cel", { required: true })}
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Cel"
-              type="tel"
-              placeholder="809-000-0000"
-            />
-            {errors.Cel?.type === "required" && <RequireFieldFormMessage />}
-          </div>
-        </div>
         <div className="flex flex-wrap -mx-3 mb-2">
-          <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Cedula"
-            >
-              Cedula
-            </label>
-            <input
-              disabled={activarEdicion}
-              {...register("Cedula", { required: true })}
-              className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Cedula"
-              type="text"
-              placeholder="001-304050-3"
-            />
-            {errors.Cedula?.type === "required" && <RequireFieldFormMessage />}
-          </div>
-
-          <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Genero"
-            >
-              Categoria
-            </label>
-            <div className="relative">
-              <select
-                disabled={activarEdicion}
-                {...register("Genero")}
-                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="Genero"
-              >
-                {categorias?.map((categorias) => (
-                  <option key={categorias}>
-                    {categorias.nombre_categoria}
-                  </option>
-                ))}
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                <svg
-                  className="fill-current h-4 w-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                </svg>
-              </div>
-            </div>
-          </div>
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
-            <label
-              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="id_Ars"
-            >
-              Categoria
-            </label>
             <div className="relative">
               <select
                 disabled={activarEdicion}
-                {...register("id_Ars")}
+                {...register("categoriaid")}
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="id_Ars"
+                id="categoriaid"
               >
                 {categorias?.map((categorias) => {
                   return (
@@ -247,20 +155,20 @@ export const ProductosForm = ({
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="id_Ars"
+              htmlFor="proveedorid"
             >
               Proveedor
             </label>
             <div className="relative">
               <select
                 disabled={activarEdicion}
-                {...register("id_Ars")}
+                {...register("proveedorid")}
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="id_Ars"
+                id="proveedorid"
               >
                 {proveedor?.map((proveedor) => {
                   return (
-                    <option key={proveedor.id} value={proveedor.nombre}>
+                    <option key={proveedor.id} value={proveedor.id}>
                       {proveedor.nombre}
                     </option>
                   );
@@ -281,17 +189,17 @@ export const ProductosForm = ({
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              htmlFor="Notas_Adicionales"
+              htmlFor="descripcion"
             >
-              Informaciones Adicionales
+              Descripción
             </label>
             <textarea
               disabled={activarEdicion}
-              {...register("Notas_Adicionales")}
+              {...register("descripcion")}
               className="appearance-none mb-4 block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="Notas_Adicionales"
+              id="descripcion"
               type="text"
-              placeholder="Informaciones Adicionales:"
+              placeholder="descripcion:"
             />
           </div>
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">

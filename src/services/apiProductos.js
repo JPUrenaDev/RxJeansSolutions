@@ -1,12 +1,15 @@
 import supabase from "./supabase";
 
-export const getAllProducts = async () => {
+export const getAllProducts = async ({ firstElement, lastElement }) => {
+  console.log(firstElement, lastElement);
   const {
     data: productos,
     error,
     count,
-  } = await supabase.from("productos").select(
-    `
+  } = await supabase
+    .from("productos")
+    .select(
+      `
     *,
     categorias (
       
@@ -16,18 +19,21 @@ export const getAllProducts = async () => {
         nombre
     )
   `,
-    { count: "exact" }
-  );
+      { count: "exact" }
+    )
+    .range(firstElement, lastElement);
 
   if (error) throw new Error();
   return { productos, count };
 };
 
-export const insertProduct = async () => {
+export const insertProduct = async (datas) => {
+  console.log(datas);
   const { data, error } = await supabase
     .from("productos")
-    .insert([{ some_column: "someValue", other_column: "otherValue" }])
-    .select();
+    .insert([datas])
+    .select()
+    .range();
 
   if (error) throw new Error();
   return data;

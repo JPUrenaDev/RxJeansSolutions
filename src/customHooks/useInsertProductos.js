@@ -1,6 +1,7 @@
 import supabase from "../services/supabase";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { insertProduct } from "../services/apiProductos";
+
 import toast from "react-hot-toast";
 export const useInsertProduct = () => {
   const queryClient = useQueryClient();
@@ -12,8 +13,8 @@ export const useInsertProduct = () => {
       // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["productos"] });
     },
-    onSettled: () => {
-      toast.error("Error al insertar el producto");
+    onError: (e) => {
+      toast.error(e.message);
     },
   });
 
