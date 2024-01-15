@@ -6,6 +6,7 @@ import { insertarUsuario } from "../../customHooks/useInsertUser";
 import { useUpdateUser } from "../../customHooks/useUpdateUser";
 import { useGetAllArs } from "../../customHooks/useGetAllArs";
 import { MdOutlineEdit } from "react-icons/md";
+import { Radio } from "@mui/material";
 
 export const ClienteForm = ({
   handleClose,
@@ -16,7 +17,7 @@ export const ClienteForm = ({
   const { createUser } = insertarUsuario(handleClose); //*CREATE REACT QUERY (MUTATE)
   const { actualizarUsuario } = useUpdateUser(handleClose); //*UPDATE REACT QUERY (MUTATE)
   const [activarEdicion, setActivarEdicion] = useState(deshabilitarInputs);
-
+  const [changeCheckbox, setChangeCheckbox] = useState(datos?.status);
   const onActivarEdicion = () => {
     setActivarEdicion(!activarEdicion);
   };
@@ -27,6 +28,7 @@ export const ClienteForm = ({
       : createUser({ ...data, imagen: data.imagen[0] });
   };
 
+  console.log(datos?.status, "pruebaaa");
   const { register, handleSubmit, errors } = useSubmitDataForm({
     datos,
   });
@@ -37,7 +39,6 @@ export const ClienteForm = ({
           <MdOutlineEdit size={30} />
         </button>
       )}
-
       <form onSubmit={handleSubmit(onSubmit)} className="w-full">
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -248,7 +249,21 @@ export const ClienteForm = ({
               type="text"
               placeholder="Informaciones Adicionales:"
             />
+            <div className="flex gap-4 items-center">
+              <label>
+                {changeCheckbox ? "Desactivar Usuario" : "Activar Usuario"}
+              </label>
+
+              <input
+                {...register("status")}
+                type="checkbox"
+                placeholder="klk"
+                defaultChecked={datos?.status}
+                onChange={() => setChangeCheckbox(!changeCheckbox)}
+              ></input>
+            </div>
           </div>
+
           <div className="w-full md:w-[1000px]  mt-7  px-3 mb-7 md:mb-0">
             <label
               className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
