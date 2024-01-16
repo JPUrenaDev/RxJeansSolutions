@@ -15,8 +15,12 @@ import { Toaster } from "react-hot-toast";
 import { Login } from "./ui/login/Login";
 import { ProtectedRoute } from "./ui/ProtectedRoute";
 import { Proovedores } from "./pages/Proveedores/Proovedores";
-import { Productos } from "./pages/Productos/Productos";
+import { MantenimientoProductos } from "./pages/Productos/MantenimientoProductos";
 import { Inventario } from "./pages/Inventario/Inventario";
+
+import { NuevaOrden } from "./pages/Ventas/NuevaOrden";
+import { HistoricoOrdenes } from "./pages/Ventas/HistoricoOrdenes";
+HistoricoOrdenes;
 
 const query = new QueryClient({
   defaultOptions: {
@@ -44,8 +48,8 @@ const router = createBrowserRouter([
         element: <Clientes />,
       },
       {
-        path: "productos",
-        element: <Productos />,
+        path: "mantenimientos-productos",
+        element: <MantenimientoProductos />,
       },
       {
         path: "seguros",
@@ -66,6 +70,16 @@ const router = createBrowserRouter([
       {
         path: "inventario",
         element: <Inventario />,
+      },
+
+      {
+        path: "nueva-orden",
+        element: <NuevaOrden />,
+      },
+
+      {
+        path: "historico-ordenes",
+        element: <HistoricoOrdenes />,
       },
     ],
   },

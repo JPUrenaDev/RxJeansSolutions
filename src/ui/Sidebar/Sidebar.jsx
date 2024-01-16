@@ -11,11 +11,11 @@ import styled from "styled-components";
 import { ElementosDelSidebar } from "./ElementosDelSidebar";
 import { RxDashboard } from "react-icons/rx";
 import { TbBusinessplan } from "react-icons/tb";
-import { ToggleItemsButton } from "./ToggleItemsButton";
+import { ToggleItemsButton, TriggerOptions } from "./ToggleItemsButton";
 import { toggleButtonClasses } from "@mui/material";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowDown } from "react-icons/io";
-
+import { MdHistory } from "react-icons/md";
 const SideBarStyles = styled.aside`
   grid-row: 1/-1;
 `;
@@ -65,15 +65,29 @@ export const Sidebar = () => {
               ></ToggleItemsButton.TriggerOptions>
 
               <ToggleItemsButton.ShowOptions>
+                <ToggleItemsButton>
+                  <ToggleItemsButton.TriggerOptions
+                    title={"Ordenes"}
+                    ButtonOpened={IoIosArrowForward}
+                    ButtonNotOpened={IoIosArrowDown}
+                  ></ToggleItemsButton.TriggerOptions>
+                  <ToggleItemsButton.ShowOptions>
+                    <div className="ml-[15px] text-blue-700">
+                      <LinkStyle to={"nueva-orden"}>
+                        <TbBusinessplan size={20} />
+                        <TextItemsStyle>Nueva Orden</TextItemsStyle>
+                      </LinkStyle>
+                      <LinkStyle to={"historico-ordenes"}>
+                        <MdHistory size={20} />
+                        <TextItemsStyle>Historico Ordenes</TextItemsStyle>
+                      </LinkStyle>
+                    </div>
+                  </ToggleItemsButton.ShowOptions>
+                </ToggleItemsButton>
                 <ul className=" text-black">
                   <LinkStyle to={"Dashboard"}>
                     <RxDashboard size={20} />
                     <TextItemsStyle>Dashboard</TextItemsStyle>
-                  </LinkStyle>
-
-                  <LinkStyle to={"Ventas"}>
-                    <TbBusinessplan size={20} />
-                    <TextItemsStyle>Ventas</TextItemsStyle>
                   </LinkStyle>
 
                   <LinkStyle>

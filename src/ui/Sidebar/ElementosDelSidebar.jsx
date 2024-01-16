@@ -24,11 +24,6 @@ export const ElementosDelSidebar = () => {
             <span>Dashboard</span>
           </Link>
 
-          <Link to={"Ventas"} className={classNameItems}>
-            <FaMoneyBillTransfer size={26} />
-            <span>Ventas</span>
-          </Link>
-
           <Link className={classNameItems}>
             <FaWhmcs size={26} />
             <span>Configuración</span>

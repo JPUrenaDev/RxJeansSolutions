@@ -44,7 +44,7 @@ export const MantenimientoItemsSidebar = () => {
         <FaClipboardUser />
         Empleados
       </LinkStyle>
-      <LinkStyle to={"productos"} className={classNameItems}>
+      <LinkStyle to={"mantenimientos-productos"} className={classNameItems}>
         <FaHive />
         Productos
       </LinkStyle>
