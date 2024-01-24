@@ -1,7 +1,6 @@
-import React, { useState } from "react";
 import { ProductosList } from "../../features/ProductosList/ProductosList";
-import { FaCartArrowDown } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 const Span = styled.span`
@@ -29,19 +28,19 @@ const CantidadItemsCar = styled.span`
   right: 1px;
 `;
 export const NuevaOrden = () => {
-  const [contador, setContador] = useState([]);
+  const products = useSelector((state) => state.addItems.items).length;
   return (
     <>
       <div className="flex justify-end">
         <Button>
-          <CantidadItemsCar>4</CantidadItemsCar>
+          <CantidadItemsCar>{products}</CantidadItemsCar>
           <Span>
             <FaShoppingCart size={34} />
           </Span>
         </Button>
       </div>
 
-      <ProductosList setContador={setContador} contador={contador} />
+      <ProductosList />
     </>
   );
 };

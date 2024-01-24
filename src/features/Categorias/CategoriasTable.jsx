@@ -12,6 +12,8 @@ import { reducirTexto } from "../../helpers/reducirTexto";
 
 export const CategoriasTable = () => {
   const { data: Categorias = [], count } = useGetAllCategories();
+
+  console.log(Categorias);
   const { totalPages, TotalItems, firstElement, lastElement } =
     usePagination(count);
 

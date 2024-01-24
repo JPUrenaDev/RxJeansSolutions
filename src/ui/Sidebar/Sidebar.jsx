@@ -85,7 +85,7 @@ export const Sidebar = () => {
                   </ToggleItemsButton.ShowOptions>
                 </ToggleItemsButton>
                 <ul className=" text-black">
-                  <LinkStyle to={"Dashboard"}>
+                  <LinkStyle to={"dashboard"}>
                     <RxDashboard size={20} />
                     <TextItemsStyle>Dashboard</TextItemsStyle>
                   </LinkStyle>

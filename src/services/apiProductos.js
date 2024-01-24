@@ -1,27 +1,27 @@
 import supabase from "./supabase";
 
-export const getAllProducts = async ({ firstElement, lastElement }) => {
-  console.log(firstElement, lastElement);
-  const {
-    data: productos,
-    error,
-    count,
-  } = await supabase
-    .from("productos")
-    .select(
-      `
-    *,
-    categorias (
-      
-      nombre_categoria
-    ),
-    proveedores(
-        nombre
-    )
-  `,
-      { count: "exact" }
-    )
-    .range(firstElement, lastElement);
+export const getAllProducts = async ({
+  firstElement,
+  lastElement,
+  categoria,
+}) => {
+  let query = supabase.from("productos").select(
+    `
+  *,
+  categorias!inner(
+    
+    nombre_categoria
+  ),
+  proveedores!inner(
+      nombre
+  )
+`,
+    { count: "exact" }
+  );
+
+  categoria && query.filter("categorias.nombre_categoria", "eq", categoria);
+  query.range(firstElement, lastElement);
+  const { data: productos, error, count } = await query;
 
   if (error) throw new Error();
   return { productos, count };

@@ -12,24 +12,29 @@ export const PaginationTable = () => {
   const { totalPages, firstElement, lastElement, TotalItems } =
     useContext(PaginationContext);
 
+  console.log(totalPages);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const NextPage = () => {
     const paginaActual = Number(searchParams.get("actualPage"));
 
-    paginaActual == 0
-      ? setSearchParams({ actualPage: paginaActual + 2 })
-      : setSearchParams({ actualPage: paginaActual + 1 });
-
-    if (paginaActual === totalPages)
-      setSearchParams({ actualPage: totalPages });
+    if (paginaActual < totalPages) {
+      searchParams.set("actualPage", paginaActual + 1);
+      setSearchParams(searchParams);
+    }
   };
 
   const PreviusPage = () => {
     const paginaActual = Number(searchParams.get("actualPage"));
-    if (paginaActual === 1) setSearchParams({ actualPage: 1 });
-    if (paginaActual !== 1 && paginaActual)
-      setSearchParams({ actualPage: paginaActual - 1 });
+    if (paginaActual === 1) {
+      searchParams.set("actualPage", 1);
+      setSearchParams(searchParams);
+    }
+    if (paginaActual !== 1 && paginaActual) {
+      searchParams.set("actualPage", paginaActual - 1);
+      setSearchParams(searchParams);
+    }
   };
 
   return (

@@ -7,15 +7,30 @@ import { PaginationContext } from "../../../context/paginationContext";
 import { BotonesTable } from "../../ui/Table/BotonesTable";
 import { ProductosForm } from "./ProductosForm";
 import { ButtonMantenimientos } from "../../ui/Buttons/ButtonMantenimientos";
+import { Filters } from "../Filters/Filters";
+import { useGetAllCategories } from "../../customHooks/useGetAllCategories";
 export const ProductosTable = () => {
-  const { data: { productos, count: cantidadProductos } = {} } =
+  const { data: { productos = [], count: cantidadProductos } = {} } =
     useGetAllProduct();
 
+  console.log(cantidadProductos);
+  const { data: Categorias = [], count } = useGetAllCategories();
   const { totalPages, TotalItems, firstElement, lastElement } = usePagination(
     cantidadProductos //esto lo estoy sacando de supabase (es el count de elementos.)
   );
+
   return (
     <>
+      <Filters
+        data={Categorias}
+        callback={(items) => {
+          return {
+            ...items,
+            label: items.nombre_categoria,
+            value: items.nombre_categoria,
+          };
+        }}
+      />
       <ButtonMantenimientos Form={ProductosForm}>
         Agregar Producto
       </ButtonMantenimientos>
@@ -35,11 +50,11 @@ export const ProductosTable = () => {
           data={productos}
           callback={(productos) => (
             <>
-              <h1>{productos.nombre_producto}</h1>
-              <h1>{productos.precio_unitario}</h1>
-              <h1>{productos.barcode}</h1>
-              <h1>{productos.categorias.nombre_categoria}</h1>
-              <h1>{productos.proveedores.nombre}</h1>
+              <h1>{productos?.nombre_producto}</h1>
+              <h1>{productos?.precio_unitario}</h1>
+              <h1>{productos?.barcode}</h1>
+              <h1>{productos?.categorias?.nombre_categoria}</h1>
+              <h1>{productos?.proveedores.nombre}</h1>
               <img></img>
               <BotonesTable datos={productos} Form={ProductosForm} />
             </>

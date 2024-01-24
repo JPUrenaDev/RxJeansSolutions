@@ -2,6 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { ITEMSXPAGE } from "../helpers/itemsXPage";
 export const usePagination = (data, loading) => {
   const totalPages = Math.ceil(data / ITEMSXPAGE);
+
   const TotalItems = data;
   const [searchParams] = useSearchParams();
   const PaginaActual = Number(

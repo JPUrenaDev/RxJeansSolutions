@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { RiStarSLine } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
 import { RxHeartFilled } from "react-icons/rx";
+import { useSelector, useDispatch } from "react-redux";
+import { addItem } from "../Slicers/itemsToTheCheckoutSlicer";
+
 const Div = styled.div`
   position: relative;
   display: flex;
@@ -27,20 +30,43 @@ const SaveItemContainer = styled.div`
   position: absolute;
   right: 10px;
 `;
+
+const ViewDetailsProduct = styled.div`
+  position: absolute;
+  right: 10px;
+`;
+
 const Button = styled.button``;
-export const RenderProducts = ({ items, setContador, contador }) => {
+export const RenderProducts = ({
+  items,
+  setContador,
+  contador,
+  setMyContador,
+  itemsad,
+  setAddItemsToCheckout,
+  itemsAddedToCheckout,
+}) => {
   const [saveHeartColor, setSaveHeartColor] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(false);
+  const dispatch = useDispatch();
+
+  const [selectedProduct] = useState(false);
+  const [valor, setValor] = useState(0);
+
+  const onAddCheckout = () => {
+    dispatch(addItem(items));
+  };
 
   const onChangeHeartColor = () => {
     setSaveHeartColor(!saveHeartColor);
+    setValor(valor + 1);
   };
+
   const stars = Array.from({ length: items.stars }, (v, i) => i);
 
   return (
     <>
       <div className="mb-3">
-        <Div className="bg-gray-300">
+        <Div className="bg-gray-300 cursor-pointer  hover:scale-110 hover:-translate-y-1 transition ease-in-out delay-150 ">
           <img src={items.imagen}></img>
           {items?.discount > 0 && (
             <>
@@ -69,10 +95,7 @@ export const RenderProducts = ({ items, setContador, contador }) => {
         <div className="flex flex-col">
           <span>{"$" + items.precio}</span>
           <Button
-            onClick={() => {
-              setContador([...contador, items]),
-                setSelectedProduct(!selectedProduct);
-            }}
+            onClick={onAddCheckout}
             className="w-[210px] h-[45px]  bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-indigo-600 hover:text-white shadow-md py-2 px-6 inline-flex items-center "
           >
             {selectedProduct ? "Quitar del carrito" : "Agregar al carrito"}

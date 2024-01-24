@@ -1,13 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAllProducts } from "../services/apiProductos";
 import { usePagination } from "./usePagination";
+import { useSearchParams } from "react-router-dom";
 
 export const useGetAllProduct = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoria =
+    searchParams.get("categoria") && searchParams.get("categoria");
+
   const { firstElement, lastElement } = usePagination();
-  console.log(firstElement, lastElement);
+
   const { data } = useQuery({
-    queryKey: ["productos", firstElement],
-    queryFn: () => getAllProducts({ firstElement, lastElement }),
+    queryKey: ["productos", firstElement, categoria],
+    queryFn: () => getAllProducts({ firstElement, lastElement, categoria }),
   });
 
   return { data };

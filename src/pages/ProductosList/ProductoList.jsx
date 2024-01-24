@@ -1,5 +1,5 @@
 import React from "react";
 
 export const ProductoList = () => {
-  return <div>ProductoList</div>;
+  return <div>ProductssoList</div>;
 };

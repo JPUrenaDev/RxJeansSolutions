@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 import { RenderProducts } from "./RenderProducts";
+import { Filters } from "../Filters/Filters";
 
 const tempArrayProduct = [
   {
     id: 1,
     NombreProducto: "Gold Standard Whey Protein",
+    value: "Gold Standard Whey Protein",
     discount: 5,
     stars: 3,
     precio: 150,
     imagen: "./public/proteinaWhey.png",
+    label: "Gold Standard Whey Protein",
   },
   {
     id: 1,
@@ -106,54 +109,6 @@ const tempArrayProduct = [
     precio: 150,
     imagen: "./public/proteinaWhey.png",
   },
-  {
-    id: 1,
-    NombreProducto: "Gold Standard Whey Protein",
-    discount: 0,
-    stars: 3,
-    precio: 150,
-    imagen: "./public/proteinaWhey.png",
-  },
-  {
-    id: 1,
-    NombreProducto: "Gold Standard Whey Protein",
-    discount: 0,
-    stars: 3,
-    precio: 150,
-    imagen: "./public/proteinaWhey.png",
-  },
-  {
-    id: 1,
-    NombreProducto: "Gold Standard Whey Protein",
-    discount: 0,
-    stars: 3,
-    precio: 150,
-    imagen: "./public/proteinaWhey.png",
-  },
-  {
-    id: 1,
-    NombreProducto: "Gold Standard Whey Protein",
-    discount: 0,
-    stars: 3,
-    precio: 150,
-    imagen: "./public/proteinaWhey.png",
-  },
-  {
-    id: 1,
-    NombreProducto: "Gold Standard Whey Protein",
-    discount: 0,
-    stars: 3,
-    precio: 150,
-    imagen: "./public/proteinaWhey.png",
-  },
-  {
-    id: 1,
-    NombreProducto: "Ampicilina (amasa)",
-    discount: 5,
-    stars: 3,
-    precio: 150,
-    imagen: "./public/AMS053.png",
-  },
 ];
 
 const newArrayProduct = tempArrayProduct.map((product) => {
@@ -165,12 +120,12 @@ const newArrayProduct = tempArrayProduct.map((product) => {
     : product;
 });
 
-console.log(newArrayProduct);
-export const ProductosList = ({ setContador, contador }) => {
+export const ProductosList = () => {
+  const [contador, setContador] = useState(1);
+  const [setMyContador] = useState(0);
+  const [itemsAddedToCheckout, setAddItemsToCheckout] = useState([]);
   const [busquedaFiltro, setBusquedaFiltro] = useState("");
-  console.log(busquedaFiltro);
-  const [elementos, setElementosFiltrados] = useState([]);
-  const valor = newArrayProduct.filter((valor) => {
+  const filteredItems = newArrayProduct.filter((valor) => {
     return valor.NombreProducto.toLowerCase().includes(
       busquedaFiltro?.toLowerCase()
     );
@@ -178,19 +133,33 @@ export const ProductosList = ({ setContador, contador }) => {
 
   return (
     <>
+      <Filters
+        data={tempArrayProduct}
+        callback={(items) => {
+          return {
+            ...items,
+            label: items.NombreProducto,
+            value: items.NombreProducto,
+          };
+        }}
+      />
       <input
-        placeholder="purbea"
+        placeholder="pruebe"
         onChange={(e) => setBusquedaFiltro(e.target.value)}
       ></input>
-      <span className="font-bold">{valor.length} PRODUCTOS</span>
-      <div className="flex flex-wrap  w-full gap-6">
-        {valor.map((items) => {
+
+      <span className="font-bold">{filteredItems.length} PRODUCTOS</span>
+      <div className="flex flex-wrap  w-full gap-6 mt-5">
+        {filteredItems.map((items) => {
           return (
             <RenderProducts
-              key={Math.random()}
+              key={items.id}
               items={items}
               setContador={setContador}
               contador={contador}
+              setMyContador={setMyContador}
+              setAddItemsToCheckout={setAddItemsToCheckout}
+              itemsAddedToCheckout={itemsAddedToCheckout}
             />
           );
         })}

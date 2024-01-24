@@ -11,6 +11,12 @@ const Div = styled.div`
   align-items: center;
   gap: 10px;
   max-width: auto;
+
+  display: flex;
+
+  @media (min-width: 300px) {
+    width: 100%;
+  }
 `;
 export const BotonesTable = ({ datos = {}, Form = {}, onConfirm }) => {
   return (
@@ -18,7 +24,7 @@ export const BotonesTable = ({ datos = {}, Form = {}, onConfirm }) => {
       <ModalW>
         <ModalW.Open>
           <button className="bg-blue-500 text-white font-bold py-1 px-2 rounded">
-            <FaEye size={30} />
+            <FaEye className="sm:size-[30px] size-[10px]" />
           </button>
         </ModalW.Open>
         <ModalW.Windows>
@@ -29,7 +35,7 @@ export const BotonesTable = ({ datos = {}, Form = {}, onConfirm }) => {
       <ModalW>
         <ModalW.Open>
           <button className="bg-green-500 text-white font-bold py-1 px-2 rounded">
-            <MdOutlineEdit size={30} />
+            <MdOutlineEdit className="sm:size-[30px] size-[10px]" />
           </button>
         </ModalW.Open>
         <ModalW.Windows>
@@ -40,7 +46,7 @@ export const BotonesTable = ({ datos = {}, Form = {}, onConfirm }) => {
       <ModalW>
         <ModalW.Open>
           <button className="bg-red-500 text-white font-bold py-1 px-2 rounded">
-            <AiOutlineDelete size={30} />
+            <AiOutlineDelete className="sm:size-[30px] size-[10px]" />
           </button>
         </ModalW.Open>
         <ModalW.Windows>

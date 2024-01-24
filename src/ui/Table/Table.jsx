@@ -8,20 +8,42 @@ import { SearchWithFilters } from "./SearchWithFilters";
 //la que estoy modifcando.
 const RowsStyle = styled.div`
   display: grid;
+
   grid-template-columns: ${(props) => props.columns};
+
+  padding: 10px;
+  width: 100%;
+  @media (min-width: 576px) {
+    font-size: 13px;
+  }
 `;
 
 const HeaderStyle = styled.div`
   display: grid;
+
   grid-template-columns: ${(props) => props.columns};
   background-color: #e8e8e8;
   padding: 10px;
-
+  width: 100%;
+  font-size: 12px;
+  @media (min-width: 576px) {
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    width: auto;
+  }
+  display: flex;
+  gap: 5px;
   font-weight: bold;
+
   color: gray;
 `;
 
-const TableStyles = styled.div``;
+const TableStyles = styled.div`
+  @media (min-width: 576px) {
+    width: auto;
+  }
+`;
 
 const FooterStyle = styled.div`
   background-color: #f9fafb;
@@ -39,11 +61,10 @@ export const Table = ({ children, columns, loading }) => {
             <div className="border flex justify-center">
               <span className="px-3">59 clientes</span>
             </div>
-            <SearchWithFilters />
           </div>
         </div>
       </div>
-      <TableStyles className="border-gray-400 rounded-md border">
+      <TableStyles className="border-gray-400 rounded-md border ">
         <TableContext.Provider value={columns}>
           {children}
         </TableContext.Provider>
@@ -58,7 +79,6 @@ const Header = ({ children }) => {
 };
 
 const Rows = ({ data, callback }) => {
-  console.log(data);
   const elementos = useContext(TableContext); //COLUMNAS
 
   return (

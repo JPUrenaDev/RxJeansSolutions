@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { Sidebar } from "./ui/Sidebar/Sidebar";
 import { QueryClient } from "@tanstack/react-query";
 import { Layout } from "./ui/Layout/Layout";
 import { NotFound } from "./ui/NotFound";
@@ -18,9 +16,11 @@ import { Proovedores } from "./pages/Proveedores/Proovedores";
 import { MantenimientoProductos } from "./pages/Productos/MantenimientoProductos";
 import { Inventario } from "./pages/Inventario/Inventario";
 
-import { NuevaOrden } from "./pages/Ventas/NuevaOrden";
+import { NuevaOrden } from "./pages/Ventas/Productos";
 import { HistoricoOrdenes } from "./pages/Ventas/HistoricoOrdenes";
-HistoricoOrdenes;
+import { Dashboard } from "./ui/Dashboard/Dashboard";
+import { store } from "./app/store";
+import { Provider } from "react-redux";
 
 const query = new QueryClient({
   defaultOptions: {
@@ -81,6 +81,11 @@ const router = createBrowserRouter([
         path: "historico-ordenes",
         element: <HistoricoOrdenes />,
       },
+
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
     ],
   },
 ]);
@@ -89,9 +94,11 @@ function App() {
   return (
     <>
       <QueryClientProvider client={query}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <RouterProvider router={router} />
-        <Toaster position="top-center" reverseOrder={false} />
+        <Provider store={store}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <RouterProvider router={router} />
+          <Toaster position="top-center" reverseOrder={false} />
+        </Provider>
       </QueryClientProvider>
     </>
   );
