@@ -21,6 +21,7 @@ import { HistoricoOrdenes } from "./pages/Ventas/HistoricoOrdenes";
 import { Dashboard } from "./ui/Dashboard/Dashboard";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
+import { CheckoutPage } from "./pages/Checkout/CheckoutPage";
 
 const query = new QueryClient({
   defaultOptions: {
@@ -85,6 +86,11 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard />,
+      },
+
+      {
+        path: "nueva-orden/checkout",
+        element: <CheckoutPage />,
       },
     ],
   },

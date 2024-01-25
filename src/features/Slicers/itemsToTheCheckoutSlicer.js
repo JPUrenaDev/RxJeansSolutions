@@ -10,9 +10,13 @@ export const itemsToTheCheckoutSlicer = createSlice({
     addItem: (state, action) => {
       state.items = [...state.items, action.payload];
     },
+
+    deleteItem: (state, action) => {
+      state.items = state.items.filter((item) => item.id !== action.payload.id);
+    },
   },
 });
 
-export const { addItem } = itemsToTheCheckoutSlicer.actions;
+export const { addItem, deleteItem } = itemsToTheCheckoutSlicer.actions;
 
 export default itemsToTheCheckoutSlicer.reducer;

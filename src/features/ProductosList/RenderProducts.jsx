@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import { RiStarSLine } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
 import { RxHeartFilled } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem } from "../Slicers/itemsToTheCheckoutSlicer";
+import { addItem, deleteItem } from "../Slicers/itemsToTheCheckoutSlicer";
 
 const Div = styled.div`
   position: relative;
@@ -39,21 +39,28 @@ const ViewDetailsProduct = styled.div`
 const Button = styled.button``;
 export const RenderProducts = ({
   items,
-  setContador,
-  contador,
-  setMyContador,
-  itemsad,
-  setAddItemsToCheckout,
-  itemsAddedToCheckout,
+  setStyleWhenAddProduct,
+  styleWhenAddAProduct,
 }) => {
   const [saveHeartColor, setSaveHeartColor] = useState(false);
   const dispatch = useDispatch();
-
-  const [selectedProduct] = useState(false);
+  const products = useSelector((state) => state.addItems.items);
+  const idProductToBasket = products.map((items) => items.id);
+  const [selectedProduct, setSelectedProduct] = useState(
+    idProductToBasket.includes(items.id) ? true : false
+  );
   const [valor, setValor] = useState(0);
+
+  useEffect(() => {
+    setStyleWhenAddProduct(products);
+  }, [products, setStyleWhenAddProduct, styleWhenAddAProduct]);
 
   const onAddCheckout = () => {
     dispatch(addItem(items));
+  };
+
+  const onDeleteCheckout = () => {
+    dispatch(deleteItem(items));
   };
 
   const onChangeHeartColor = () => {
@@ -95,10 +102,19 @@ export const RenderProducts = ({
         <div className="flex flex-col">
           <span>{"$" + items.precio}</span>
           <Button
-            onClick={onAddCheckout}
-            className="w-[210px] h-[45px]  bg-white text-gray-800 font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-indigo-600 hover:text-white shadow-md py-2 px-6 inline-flex items-center "
+            onClick={() => {
+              setSelectedProduct(!selectedProduct);
+              !selectedProduct ? onAddCheckout() : onDeleteCheckout();
+            }}
+            className={`w-[210px] h-[45px]  ${
+              idProductToBasket.includes(items.id)
+                ? "bg-red-700 text-white"
+                : "bg-white"
+            } font-bold rounded border-b-2 border-green-500 hover:border-green-600 hover:bg-indigo-600 hover:text-white shadow-md py-2 px-6 inline-flex items-center `}
           >
-            {selectedProduct ? "Quitar del carrito" : "Agregar al carrito"}
+            {idProductToBasket.includes(items.id)
+              ? "Quitar del carrito"
+              : "Agregar al carrito"}
           </Button>
         </div>
       </div>
