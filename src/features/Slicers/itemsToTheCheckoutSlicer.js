@@ -12,7 +12,8 @@ export const itemsToTheCheckoutSlicer = createSlice({
     },
 
     deleteItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
+      console.log(action.payload);
+      state.items = state.items.filter((item) => item.id !== action.payload);
     },
   },
 });

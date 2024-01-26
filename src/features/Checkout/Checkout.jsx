@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CheckoutItems } from "./CheckoutItems";
 import { SubTotal } from "./SubTotal";
 import { useSelector } from "react-redux";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 export const Checkout = () => {
   const products = useSelector((state) => state.addItems.items);
   const navigate = useNavigate();
+  //global state
+  const [cantidadItemsCheckout, setCantidadItemsCheckout] = useState([]);
 
   return (
     <>
@@ -33,9 +35,16 @@ export const Checkout = () => {
       </button>
 
       <div className="flex justify-between">
-        <div className="flex flex-col">
+        <div className="flex flex-col w-[1200px]">
           {products.map((items) => {
-            return <CheckoutItems key={items.id} items={items} />;
+            return (
+              <CheckoutItems
+                setCantidadItemsCheckout={setCantidadItemsCheckout}
+                cantidadItemsCheckout={cantidadItemsCheckout}
+                key={items.id}
+                items={items}
+              />
+            );
           })}
         </div>
         <SubTotal />

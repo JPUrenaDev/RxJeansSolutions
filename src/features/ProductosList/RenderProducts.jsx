@@ -53,14 +53,14 @@ export const RenderProducts = ({
 
   useEffect(() => {
     setStyleWhenAddProduct(products);
-  }, [products, setStyleWhenAddProduct, styleWhenAddAProduct]);
+  }, [products, setStyleWhenAddProduct]);
 
   const onAddCheckout = () => {
     dispatch(addItem(items));
   };
 
   const onDeleteCheckout = () => {
-    dispatch(deleteItem(items));
+    dispatch(deleteItem(items.id));
   };
 
   const onChangeHeartColor = () => {
