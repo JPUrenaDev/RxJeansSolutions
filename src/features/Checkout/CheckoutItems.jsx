@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { deleteItem } from "../Slicers/itemsToTheCheckoutSlicer";
+import {
+  decrementAmount,
+  deleteItem,
+} from "../Slicers/itemsToTheCheckoutSlicer";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { onIncrementAmountXitems } from "../Slicers/updateAmountOfItemsCheckoutSlicer";
+import { incrementAmount } from "../Slicers/itemsToTheCheckoutSlicer";
 
 const Img = styled.img`
   cursor: pointer;
@@ -11,35 +15,22 @@ export const CheckoutItems = ({
   items: { NombreProducto, id, imagen, discount, stars, precio } = {},
 }) => {
   const dispatch = useDispatch();
-  const itemsFromSlice = useSelector(
-    (state) => state.updateAmount.individualItems
-  );
-  const actualItem = itemsFromSlice.find((item) => item.id === id);
-  console.log(actualItem?.amountItem);
 
-  const [cantidadxItemIndividual, setcantidadxItemIndividual] = useState(
-    actualItem?.amountItem
-  );
+  const itemsFromSlice = useSelector((state) => state.addItems.items);
+  const individualItem = itemsFromSlice?.find((item) => item.id == id);
 
   //the code bellow indicate or is used for inserting the amount of items at the moment the user wants to add another product after being in the checkout session.
 
-  useEffect(() => {
-    dispatch(
-      onIncrementAmountXitems({ id, amountItem: cantidadxItemIndividual })
-    );
-  }, [cantidadxItemIndividual, dispatch, id]);
-
-  const onAddItem = () => {
-    setcantidadxItemIndividual(
-      (cantidadxItemIndividual) => cantidadxItemIndividual + 1
-    );
+  const deleteItems = () => {
+    dispatch(deleteItem({ id }));
   };
 
-  const onDecrementAmountXitems = () => {
-    setCantidadItemsCheckout([
-      ...cantidadItemsCheckout,
-      { id, amountItem: cantidadxItemIndividual },
-    ]);
+  const onIncrementItenByOne = () => {
+    dispatch(incrementAmount({ amount: individualItem.amount + 1, id }));
+  };
+
+  const onDecrementItemByOne = () => {
+    dispatch(decrementAmount({ amount: individualItem.amount - 1, id }));
   };
   return (
     <div className="flex justify-between items-center">
@@ -57,15 +48,15 @@ export const CheckoutItems = ({
       </div>
       <div>
         <button
-          onClick={() => onAddItem()}
+          onClick={onIncrementItenByOne}
           type="button"
           className="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
         >
           +
         </button>
-        <label>{actualItem?.amountItem}</label>
+        <label>{individualItem.amount}</label>
         <button
-          onClick={() => onAddItem}
+          onClick={onDecrementItemByOne}
           type="button"
           className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
         >
@@ -73,7 +64,7 @@ export const CheckoutItems = ({
         </button>
 
         <button
-          onClick={() => dispatch(deleteItem(id))}
+          onClick={deleteItems}
           type="button"
           className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
         >

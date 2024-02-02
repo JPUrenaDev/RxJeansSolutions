@@ -30,6 +30,7 @@ const CantidadItemsCar = styled.span`
 `;
 export const NuevaOrden = () => {
   const products = useSelector((state) => state.addItems.items).length;
+  console.log(useSelector((state) => state.addItems.items));
   return (
     <>
       <div className="flex justify-end">

@@ -142,7 +142,7 @@ export const ProductosList = () => {
         }}
       />
       <input
-        placeholder="pruebe"
+        placeholder="prueba"
         onChange={(e) => setBusquedaFiltro(e.target.value)}
       ></input>
 

@@ -4,7 +4,11 @@ import { RiStarSLine } from "react-icons/ri";
 import { CiHeart } from "react-icons/ci";
 import { RxHeartFilled } from "react-icons/rx";
 import { useSelector, useDispatch } from "react-redux";
-import { addItem, deleteItem } from "../Slicers/itemsToTheCheckoutSlicer";
+import {
+  addItem,
+  deleteItem,
+  incrementAmount,
+} from "../Slicers/itemsToTheCheckoutSlicer";
 
 const Div = styled.div`
   position: relative;
@@ -45,7 +49,7 @@ export const RenderProducts = ({
   const [saveHeartColor, setSaveHeartColor] = useState(false);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.addItems.items);
-  const idProductToBasket = products.map((items) => items.id);
+  const idProductToBasket = products.map((items) => items?.id);
   const [selectedProduct, setSelectedProduct] = useState(
     idProductToBasket.includes(items.id) ? true : false
   );
@@ -56,7 +60,7 @@ export const RenderProducts = ({
   }, [products, setStyleWhenAddProduct]);
 
   const onAddCheckout = () => {
-    dispatch(addItem(items));
+    dispatch(addItem({ ...items, amount: 1 }));
   };
 
   const onDeleteCheckout = () => {

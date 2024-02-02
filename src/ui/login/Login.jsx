@@ -18,7 +18,6 @@ export const Login = () => {
         setPass("");
       },
     });
-    console.log(data);
   };
   return (
     <>

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  individualItems: [],
+  individualItems: [{ id: 1, amountItem: 1 }],
 };
 export const updateAmountOfItemsCheckoutSlicer = createSlice({
   name: "itemsUpdate",
@@ -11,9 +11,7 @@ export const updateAmountOfItemsCheckoutSlicer = createSlice({
         (items) => items.id !== action.payload.id
       );
 
-      console.log(excluirItem);
       state.individualItems = [...excluirItem, action.payload];
-      console.log(action.payload);
     },
   },
 });
